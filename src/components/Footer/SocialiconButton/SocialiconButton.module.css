@@ -1,3 +1,10 @@
+.icon {
+  color: white;
+}
+.iconBtn:hover {
+  background-color: #3a3a3a;
+}
+
 .iconBtn {
-  padding: 20px;
+  margin: 12px;
 }
