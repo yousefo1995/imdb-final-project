@@ -27,10 +27,10 @@ const theme = createTheme({
     },
     body1: {
       fontSize: "1rem",
-      fontWeight: 400,
+      fontWeight: 600,
     },
     button: {
-      fontSize: "1rem",
+      fontSize: "0.875rem",
       fontWeight: 700,
     },
   },
