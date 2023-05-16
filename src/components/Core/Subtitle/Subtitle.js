@@ -4,14 +4,24 @@ import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
 import { SubtitleLink } from "./style";
 
 // props
-// showIcon
+// showStartIcon
+// showEndIcon
 
-const Subtitle = ({ showIcon = true, children, ...res }) => {
+const Subtitle = ({
+  showStartIcon = true,
+  showEndIcon = true,
+  children,
+  ...res
+}) => {
   return (
     <SubtitleLink variant="h2" href="#" {...res}>
-      <HorizontalRuleIcon fontSize="large" className="iconB" />
+      {showStartIcon && (
+        <HorizontalRuleIcon fontSize="large" className="iconB" />
+      )}
       {children}
-      {showIcon && <KeyboardArrowRightIcon fontSize="large" className="icon" />}
+      {showEndIcon && (
+        <KeyboardArrowRightIcon fontSize="large" className="icon" />
+      )}
     </SubtitleLink>
   );
 };
