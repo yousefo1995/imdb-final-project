@@ -6,6 +6,7 @@ export const StyledCard = styled(Card)(({ theme }) => ({
   borderRadius: "0px",
   backgroundColor: "#1A1A1A",
   maxWidth: "232px",
+  marginRight: "0.875rem",
 }));
 
 export const StyledWishlistBtn = styled(WishlistButton)(({ theme }) => ({
