@@ -6,7 +6,7 @@ export const StyledIconButton = styled(IconButton)(
     theme,
     iconSize,
     borderR,
-    showBorder,
+    showborder,
     iconColor,
     width,
     height,
@@ -18,7 +18,7 @@ export const StyledIconButton = styled(IconButton)(
     borderRadius: borderR || "12px",
     width: width,
     height: height,
-    border: showBorder ? "1px solid #ffffffb3" : "none",
+    border: showborder ? "1px solid #ffffffb3" : "none",
 
     backgroundColor: bg,
     "&:hover": {

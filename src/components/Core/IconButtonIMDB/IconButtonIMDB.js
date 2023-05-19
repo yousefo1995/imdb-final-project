@@ -4,7 +4,7 @@ const IconButtonIMDB = ({
   children,
   iconSize,
   borderR,
-  showBorder,
+  showborder,
   iconColor,
   width,
   height,

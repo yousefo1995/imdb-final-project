@@ -1,15 +1,18 @@
 import { Button } from "@mui/material";
 import { styled } from "@mui/system";
 
-export const StyledButton = styled(Button)(({ theme, isYellow, padding }) => ({
-  cursor: "pointer",
-  paddingTop: "4px",
-  paddingBottom: "4px",
-  paddingLeft: padding,
-  paddingRight: padding,
-  color: isYellow ? "#000" : "#5799ef",
-  backgroundColor: isYellow ? "#f5c518" : "#1F1F1F",
-  "&:hover": {
-    backgroundColor: isYellow ? "#E2B616" : "#2F2F2F",
-  },
-}));
+export const StyledButton = styled(Button)(
+  ({ theme, padding, showborder, color, bg, bghover }) => ({
+    cursor: "pointer",
+    paddingTop: "4px",
+    paddingBottom: "4px",
+    border: showborder ? "1px solid black" : "none",
+    paddingLeft: padding,
+    paddingRight: padding,
+    color: color || "#000",
+    backgroundColor: bg || "#f5c518",
+    "&:hover": {
+      backgroundColor: bghover || "#E2B616",
+    },
+  })
+);
