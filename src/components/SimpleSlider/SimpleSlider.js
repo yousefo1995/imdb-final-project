@@ -1,65 +1,48 @@
-import React, { Component } from "react";
+import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Container } from "@mui/material";
 
-import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
-import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-function ArrowNext(props) {
-  const { className, onClick } = props;
-  return (
-    <div className={className} onClick={onClick}>
-      <ArrowForwardIosRoundedIcon sx={{ color: "blue", fontSize: "30px" }} />,
-    </div>
-  );
-}
+import { ArrowBack, ArrowNext } from "./Arrows";
 
-function ArrowBack(props) {
-  const { className, onClick } = props;
-  return (
-    <div className={className} onClick={onClick}>
-      <ArrowBackIosRoundedIcon sx={{ color: "blue", fontSize: "30px" }} />,
-    </div>
-  );
-}
-const SimpleSlider = ({ children }) => {
+const SimpleSlider = ({ children, showOneSlide }) => {
   var settings = {
     dots: false,
-    infinite: false, // for main slide true
+    infinite: showOneSlide ? true : false, // for main slide true
     speed: 500,
-    slidesToShow: 6, // main slider props 1 for all
-    slidesToScroll: 4,
+    slidesToShow: showOneSlide ? 1 : 6,
+    slidesToScroll: showOneSlide ? 1 : 4,
     initialSlide: 0,
     // rtl: true,
     draggable: true,
     centerMode: false,
     touchThreshold: 10,
     touchMove: false,
-    // autoplay: true, // main slider props
+    autoplay: showOneSlide ? true : false,
     nextArrow: <ArrowNext />,
     prevArrow: <ArrowBack />,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4.5,
-          slidesToScroll: 3,
+          slidesToShow: showOneSlide ? 1 : 4.5,
+          slidesToScroll: showOneSlide ? 1 : 3,
           infinite: true,
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2.25,
-          slidesToScroll: 2,
+          slidesToShow: showOneSlide ? 1 : 2.25,
+          slidesToScroll: showOneSlide ? 1 : 2,
           initialSlide: 2,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2.25,
+          slidesToShow: showOneSlide ? 1 : 2.25,
           slidesToScroll: 1,
         },
       },
