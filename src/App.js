@@ -1,12 +1,6 @@
 import "./App.css";
-import NavBar from "./components/NavBar/NavBar";
-import { useEffect } from "react";
 function App() {
-  return (
-    <div>
-      <NavBar />
-    </div>
-  );
+  return <div></div>;
 }
 
 export default App;
