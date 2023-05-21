@@ -1,15 +1,9 @@
 import React from "react";
-import {
-  CardActionArea,
-  CardMedia,
-  Box,
-  Typography,
-  CardContent,
-} from "@mui/material";
-import StyledTrailerCard from "./Style";
+import { CardMedia, Box, Typography } from "@mui/material";
+import StyledTrailerCard, { StyledCardContent } from "./Style";
 import PlayCircleOutlineRoundedIcon from "@mui/icons-material/PlayCircleOutlineRounded";
-import { Stack } from "@mui/system";
 import Subtitle from "../Core/Subtitle/Subtitle";
+
 const TrailerCard = ({
   title = "title",
   time = "0:00",
@@ -17,31 +11,30 @@ const TrailerCard = ({
 }) => {
   return (
     <StyledTrailerCard>
-      <CardMedia component="img" image={image} className="card-image" />
-      <CardContent>
-        <Box display="flex" alignItems="center">
+      <Box display="flex" alignItems="center">
+        <CardMedia component="img" image={image} className="card-image" />
+      </Box>
+      <StyledCardContent>
+        <Box display="flex" mb={1} alignItems="flex-end">
           <PlayCircleOutlineRoundedIcon className="play-icon" />
-          <Typography color="#fff" fontSize="20px" fontWeight="400">
-            {time}{" "}
+          <Typography color="#fff" fontSize="16px" fontWeight="400">
+            {time}
           </Typography>
         </Box>
         <Subtitle
           showEndIcon={false}
           showStartIcon={false}
           fontWeight="400"
-          overFlow="hidden" // not working ? ??
+          overFlow="hidden" // not working
+          textOverflow="ellipsis" //
+          fontSize="16px"
         >
           {title}
         </Subtitle>
-        <Typography
-          variant="body2"
-          overflow="hidden"
-          textOverflow="ellipsis"
-          whiteSpace="nowrap"
-        >
+        <Typography variant="body2" overflow="hidden" textOverflow="ellipsis">
           A little description of the movie.
         </Typography>
-      </CardContent>
+      </StyledCardContent>
     </StyledTrailerCard>
   );
 };

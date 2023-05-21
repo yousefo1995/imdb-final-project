@@ -1,14 +1,21 @@
 import styled from "@emotion/styled";
-import { Card } from "@mui/material";
+import { Card, CardContent } from "@mui/material";
 
+export const StyledCardContent = styled(CardContent)(({ theme }) => ({
+  paddingLeft: "0",
+  paddingRight: "0",
+  paddingBottom: "0",
+}));
 const StyledTrailerCard = styled(Card)(({ theme }) => ({
-  padding: "16px",
-  backgroundColor: "rgba(0,0,0,1)",
-  display: "flex",
+  backgroundColor: "rgba(18, 18, 18, 0.95)",
+  display: window.innerWidth <= 1024 ? "none" : "flex",
   alignItems: "center",
   color: "#ffffff",
   borderRadius: "0",
-  //   backgroundColor: "rgb(0,0,0,1)",
+  flexDirection: "row",
+  paddingLeft: "16px",
+  paddingRight: "16px",
+
   "& .card-image": {
     width: "112px",
     height: "112px",
@@ -16,19 +23,21 @@ const StyledTrailerCard = styled(Card)(({ theme }) => ({
   },
 
   [theme.breakpoints.between("1024", "1280")]: {
-    display: "block",
     width: "298px",
-    paddingLeft: "16px",
-    paddingRight: "16px",
+
     height: "112px",
+    paddingLeft: "8px",
+    paddingRight: "8px",
   },
 
   [theme.breakpoints.up("1280")]: {
-    display: "block",
     width: "372px",
-    paddingLeft: "16px",
-    paddingRight: "16px",
+
     height: "148px",
+  },
+  "& .play-icon": {
+    fontSize: "32px",
+    marginRight: "8px",
   },
   "&:hover": {
     "& .play-icon": {
@@ -36,11 +45,6 @@ const StyledTrailerCard = styled(Card)(({ theme }) => ({
       cursor: "pointer",
     },
   },
-  //   [theme.breakpoints.up("sm")]: {
-  //     // "& .info-box": {
-  //     //   width: "100%",
-  //     // },
-  //   },
 }));
 
 export default StyledTrailerCard;
