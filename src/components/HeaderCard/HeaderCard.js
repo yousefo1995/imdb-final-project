@@ -1,10 +1,7 @@
 import React from "react";
-import { CardActionArea, Typography, CardMedia, Box } from "@mui/material";
-import PlayCircleOutlineRoundedIcon from "@mui/icons-material/PlayCircleOutlineRounded";
-import { Stack } from "@mui/system";
+import { CardActionArea, CardMedia, Box } from "@mui/material";
 
 import MovieCard from "../MovieCard/MovieCard/MovieCard";
-import Subtitle from "../Core/Subtitle/Subtitle";
 import StyledHeaderCard from "./StyledHeaderCard/StyledHeaderCard";
 import HeaderPlayCard from "./HeaderPlayCard/HeaderPlayCard";
 
@@ -43,10 +40,5 @@ const HeaderCard = ({
     </StyledHeaderCard>
   );
 };
-
-//  style card when hover : icon color
-// styled card ...res
-//props for card also watch trailer link
-// width 100 % color rgb (0,0,0,0.75)
 
 export default HeaderCard;
