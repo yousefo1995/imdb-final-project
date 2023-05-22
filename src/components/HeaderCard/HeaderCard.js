@@ -1,5 +1,5 @@
 import React from "react";
-import { CardActionArea, CardMedia, Box } from "@mui/material";
+import { CardActionArea, CardMedia, Box, Stack } from "@mui/material";
 
 import MovieCard from "../MovieCard/MovieCard/MovieCard";
 import StyledHeaderCard from "./StyledHeaderCard/StyledHeaderCard";
@@ -21,8 +21,8 @@ const HeaderCard = ({
         />
       </CardActionArea>
 
-      <Box
-        display="flex"
+      <Stack
+        flexDirection="row"
         mb="0"
         position="absolute"
         bottom="0"
@@ -32,11 +32,11 @@ const HeaderCard = ({
         paddingTop="16px"
         className="info-box"
       >
-        <Box paddingLeft="16px">
+        <Stack paddingLeft="16px">
           <MovieCard showFullCard={false} />
-        </Box>
+        </Stack>
         <HeaderPlayCard title={title} time={time} />
-      </Box>
+      </Stack>
     </StyledHeaderCard>
   );
 };

@@ -1,20 +1,20 @@
 import React from "react";
-import { Typography, Box } from "@mui/material";
+import { Typography } from "@mui/material";
 import PlayCircleOutlineRoundedIcon from "@mui/icons-material/PlayCircleOutlineRounded";
 import { Stack } from "@mui/system";
-
 import Subtitle from "../../Core/Subtitle/Subtitle";
+import "./style.css";
 
 const HeaderPlayCard = ({ title, time }) => {
   return (
-    <Box display="flex">
+    <Stack flexDirection="row">
       <PlayCircleOutlineRoundedIcon className="play-icon" />
       <Stack flexDirection="column" justifyContent="space-evenly">
         <Subtitle
           showEndIcon={false}
           showStartIcon={false}
           fontWeight="400"
-          overFlow="hidden" // not working ? ??
+          className="header-card-title"
         >
           {title}
         </Subtitle>
@@ -33,7 +33,7 @@ const HeaderPlayCard = ({ title, time }) => {
           {time}{" "}
         </Typography>
       </Stack>
-    </Box>
+    </Stack>
   );
 };
 
