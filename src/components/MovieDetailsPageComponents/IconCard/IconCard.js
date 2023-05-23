@@ -9,7 +9,7 @@ const IconCard = ({ children, icon }) => {
     <StyledIconCard>
       {icon === "videos" && <VideoLibraryRoundedIcon className="icon" />}{" "}
       {icon === "photos" && <PhotoLibraryRoundedIcon className="icon" />}
-      <Typography>{children}</Typography>
+      <Typography fontSize={{ lg: "16px", xs: "12px" }}>{children}</Typography>
     </StyledIconCard>
   );
 };
