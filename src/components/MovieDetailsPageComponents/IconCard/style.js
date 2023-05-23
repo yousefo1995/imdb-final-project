@@ -2,7 +2,7 @@ import { Card } from "@mui/material";
 import styled from "@emotion/styled";
 
 const StyledIconCard = styled(Card)(({ theme }) => ({
-  height: "164px",
+  height: "100%",
   backgroundColor: "#3A3A3A",
   color: "#fff",
   paddingLeft: "16px",
@@ -12,11 +12,13 @@ const StyledIconCard = styled(Card)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   [theme.breakpoints.down("lg")]: {
-    flexDirection: "row",
     height: "36px",
+    flexDirection: "row",
   },
   [theme.breakpoints.up("xl")]: {
-    height: "204px",
+    height: "100%",
+    maxHeight: "320px",
+    minHeight: "180px",
   },
 
   "& .icon": {
@@ -24,6 +26,8 @@ const StyledIconCard = styled(Card)(({ theme }) => ({
     marginBottom: "16px",
     [theme.breakpoints.down("lg")]: {
       fontSize: "12px",
+      marginBottom: "0",
+      marginRight: "4px",
     },
   },
 }));
