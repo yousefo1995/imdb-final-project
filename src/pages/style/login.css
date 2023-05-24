@@ -1,0 +1,10 @@
+.login-input {
+  height: 24px;
+  width: 280px;
+}
+
+.login-label {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-size: 13px;
+}
