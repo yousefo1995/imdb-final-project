@@ -6,8 +6,9 @@ import ImdbButton from "../components/Core/ImdbButton/ImdbButton";
 import "./style/login.css";
 import { Link } from "react-router-dom";
 
-const LoginPage = () => {
+const SignUpPage = () => {
   const [loginData, setLoginData] = useState({
+    name: "",
     email: "",
     pasword: "",
   });
@@ -27,7 +28,7 @@ const LoginPage = () => {
     e.preventDefault();
   };
 
-  const { email, password } = loginData;
+  const { name, email, password } = loginData;
 
   return (
     <Box
@@ -56,9 +57,20 @@ const LoginPage = () => {
           color="#111111"
           fontWeight="400"
         >
-          Sign in
+          Create account
         </Typography>
         <form onSubmit={handleSubmit}>
+          <Box display="flex" flexDirection="column" marginBottom={2}>
+            <label className="login-label">Your name</label>
+            <input
+              name="name"
+              value={name}
+              type="name"
+              onChange={handleChange}
+              className="login-input"
+              placeholder=" First and last name"
+            ></input>
+          </Box>
           <Box display="flex" flexDirection="column" marginBottom={2}>
             <label className="login-label">Email</label>
             <input
@@ -66,8 +78,8 @@ const LoginPage = () => {
               value={email}
               type="email"
               onChange={handleChange}
-              placeholder=" Email"
               className="login-input"
+              placeholder=" Your Email"
             ></input>
           </Box>
           <Box display="flex" flexDirection="column" marginBottom={4}>
@@ -78,36 +90,33 @@ const LoginPage = () => {
               value={password}
               type="password"
               onChange={handleChange}
-              placeholder=" Password"
               className="login-input"
+              placeholder=" at least 8 characters"
             ></input>
           </Box>
           <ImdbButton
             fontSize="12px"
             fontWeight="400"
             showborder={true}
-            padding="125px"
+            padding="73px"
             textTransform="none"
           >
-            Sign in
+            Create your IMDb account
           </ImdbButton>
         </form>
-        <Stack alignItems="center" marginTop={7}>
-          <Typography fontSize="12px" fontWeight="400" marginBottom={1}>
-            New to IMDB?
+        <Stack flexDirection="row" alignItems="center" marginTop={7}>
+          <Typography fontSize="13px" fontWeight="400" marginBottom={1}>
+            Already have an account?
           </Typography>
-          <Link to="/signup">
-            <ImdbButton
-              fontSize="12px"
-              fontWeight="400"
-              showborder={true}
-              padding="73px"
-              bg="#EEEFF2"
-              bghover="#DFE2E7"
-              textTransform="none"
+          <Link to="/login">
+            <Typography
+              marginLeft={1}
+              marginBottom={1}
+              fontSize="13px"
+              color="info.main"
             >
-              Create your IMDb account
-            </ImdbButton>
+              sign in
+            </Typography>
           </Link>
         </Stack>
       </Box>
@@ -115,4 +124,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
