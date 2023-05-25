@@ -3,13 +3,9 @@ import {
   Toolbar,
   AppBar,
   Typography,
-  Button,
-  Box,
   Select,
   MenuItem,
-  Divider,
   Stack,
-  Container,
 } from "@mui/material";
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -22,10 +18,9 @@ import {
   StyledInputBase,
   Search,
 } from "./StyledComponents/StyledComponents";
-import StyledCardButton from "../MovieCard/StyledCardButton/StyledCardButton";
-
 import { logoUrl, proLogo } from "./NavConstants";
-import { display } from "@mui/system";
+import UserMenu from "./UserMenu/UserMenu";
+import { Link } from "react-router-dom";
 
 const categories = ["All", "Title", "TV Episodes"];
 
@@ -54,7 +49,7 @@ const NavBar = () => {
           }}
         >
           <Stack flexDirection="row" height="32px">
-            <Stack display={{ xs: "none", lg: "block" }}>
+            <Stack display={{ xs: "none", lg: "contents" }}>
               <img src={logoUrl} alt="logoUrl" width={64}></img>
             </Stack>
             <NavButton>
@@ -113,20 +108,11 @@ const NavBar = () => {
           </Stack>
           <Stack flexDirection="row" height="32px">
             <Stack
-              display={{ xs: "none", lg: "block" }}
+              display={{ xs: "none", lg: "contents" }}
               flexDirection="row"
               alignItems="center"
             >
               <img src={proLogo} alt="logoUrl" width={64}></img>
-              {/* <Divider
-                orientation="vertical"
-                sx={{
-                  // marginLeft: "24px",
-                  // marginRight: "8px",
-                  borderColor: "#383838",
-                  height: "100%",
-                }}
-              /> */}
             </Stack>
             <Stack
               display={{ xs: "none", lg: "contents" }}
@@ -141,10 +127,16 @@ const NavBar = () => {
                 Watchlist
               </NavButton>
             </Stack>
+            <Stack flexDirection="row" alignItems="center">
+              <UserMenu />
+              {/* <Link to="/login">
+                <NavButton>Sign In</NavButton>
+              </Link> */}
+            </Stack>
 
-            <NavButton>Sign In</NavButton>
-
-            <NavButton endIcon={<ArrowDropDownIcon />}>EN</NavButton>
+            <NavButton endIcon={<ArrowDropDownIcon color="info" />}>
+              EN
+            </NavButton>
           </Stack>
         </Toolbar>
       </Stack>
