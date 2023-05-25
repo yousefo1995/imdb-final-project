@@ -1,14 +1,28 @@
 import React from "react";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import NavButton from "../NavButton/NavButton";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Stack } from "@mui/material";
+import { useContext } from "react";
+import { AuthContext } from "../../../AuthContext";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../Firebase";
+import { useNavigate } from "react-router-dom";
 
 const UserMenu = ({ userName = "yousefo123" }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handelLogOut = async () => {
+    await signOut(auth);
+    navigate("/");
+  };
+
+  const splitUserName = (email) => email.split("@")[0];
+
   const handleClick = (event) => {
     event.preventDefault();
     setAnchorEl(event.currentTarget);
@@ -19,7 +33,6 @@ const UserMenu = ({ userName = "yousefo123" }) => {
   };
   return (
     <Stack>
-      {/* <Button>{userName}</Button> */}
       <NavButton
         id="demo-positioned-button"
         aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -28,7 +41,7 @@ const UserMenu = ({ userName = "yousefo123" }) => {
         onClick={handleClick}
         endIcon={<ArrowDropDownIcon color="secondary" />}
       >
-        {userName}
+        {currentUser && splitUserName(currentUser.email)}
       </NavButton>
       <Menu
         id="demo-positioned-menu"
@@ -46,8 +59,8 @@ const UserMenu = ({ userName = "yousefo123" }) => {
         }}
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>Watchlist</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={() => navigate("/wlist")}>your Watchlist</MenuItem>
+        <MenuItem onClick={handelLogOut}>Logout</MenuItem>
       </Menu>
     </Stack>
   );
