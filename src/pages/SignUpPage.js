@@ -5,30 +5,40 @@ import { logoUrl } from "../components/NavBar/NavConstants";
 import ImdbButton from "../components/Core/ImdbButton/ImdbButton";
 import "./style/login.css";
 import { Link } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Firebase";
+import ErrorMessage from "../components/LoginComponents/ErrorMessage";
 
 const SignUpPage = () => {
-  const [loginData, setLoginData] = useState({
+  const [signupData, setSignupData] = useState({
     name: "",
     email: "",
     pasword: "",
   });
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  //
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setLoginData({
-      ...loginData,
+    setSignupData({
+      ...signupData,
       [name]: value,
     });
+    setErrorMessage(null);
     //
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const { name, email, password } = signupData;
 
-  const { name, email, password } = loginData;
+  const handelRegister = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(auth, email, password);
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+      setErrorMessage(error.message);
+    }
+  };
 
   return (
     <Box
@@ -59,7 +69,7 @@ const SignUpPage = () => {
         >
           Create account
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handelRegister}>
           <Box display="flex" flexDirection="column" marginBottom={2}>
             <label className="login-label">Your name</label>
             <input
@@ -94,12 +104,13 @@ const SignUpPage = () => {
               placeholder=" at least 8 characters"
             ></input>
           </Box>
+          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+
           <ImdbButton
             fontSize="12px"
             fontWeight="400"
             showborder={true}
-            padding="73px"
-            textTransform="none"
+            onClick={handelRegister}
           >
             Create your IMDb account
           </ImdbButton>

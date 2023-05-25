@@ -5,14 +5,17 @@ import { logoUrl } from "../components/NavBar/NavConstants";
 import ImdbButton from "../components/Core/ImdbButton/ImdbButton";
 import "./style/login.css";
 import { Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Firebase";
+import ErrorMessage from "../components/LoginComponents/ErrorMessage";
 
 const LoginPage = () => {
   const [loginData, setLoginData] = useState({
     email: "",
     pasword: "",
   });
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  //
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -20,14 +23,20 @@ const LoginPage = () => {
       ...loginData,
       [name]: value,
     });
-    //
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    setErrorMessage(null);
   };
 
   const { email, password } = loginData;
+
+  const handelLogin = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+      setErrorMessage(error.message);
+    }
+  };
 
   return (
     <Box
@@ -58,7 +67,7 @@ const LoginPage = () => {
         >
           Sign in
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handelLogin}>
           <Box display="flex" flexDirection="column" marginBottom={2}>
             <label className="login-label">Email</label>
             <input
@@ -82,12 +91,12 @@ const LoginPage = () => {
               className="login-input"
             ></input>
           </Box>
+          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           <ImdbButton
             fontSize="12px"
             fontWeight="400"
             showborder={true}
-            padding="125px"
-            textTransform="none"
+            onClick={handelLogin}
           >
             Sign in
           </ImdbButton>
@@ -101,10 +110,8 @@ const LoginPage = () => {
               fontSize="12px"
               fontWeight="400"
               showborder={true}
-              padding="73px"
               bg="#EEEFF2"
               bghover="#DFE2E7"
-              textTransform="none"
             >
               Create your IMDb account
             </ImdbButton>
