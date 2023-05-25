@@ -19,19 +19,25 @@ import {
   Search,
 } from "./StyledComponents/StyledComponents";
 import { logoUrl, proLogo } from "./NavConstants";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthContext";
 import UserMenu from "./UserMenu/UserMenu";
-import { Link } from "react-router-dom";
+import "./style.css";
 
 const categories = ["All", "Title", "TV Episodes"];
 
 const NavBar = () => {
-  // const classes = useStyles();
   const [category, setCategory] = useState("All");
+  const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
+
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
   };
+
   return (
-    <AppBar>
+    <AppBar sx={{ position: "static" }}>
       <Stack
         flexDirection="row"
         justifyContent="center"
@@ -50,9 +56,15 @@ const NavBar = () => {
         >
           <Stack flexDirection="row" height="32px">
             <Stack display={{ xs: "none", lg: "contents" }}>
-              <img src={logoUrl} alt="logoUrl" width={64}></img>
+              <img
+                src={logoUrl}
+                alt="logoUrl"
+                width={64}
+                onClick={() => navigate("/")}
+                className="Nav-logo"
+              ></img>
             </Stack>
-            <NavButton>
+            <NavButton disabled>
               <MenuIcon color="#fff" />
               <Typography
                 marginLeft={0.5}
@@ -64,7 +76,13 @@ const NavBar = () => {
               </Typography>
             </NavButton>
             <Stack marginRight={1} display={{ xs: "block", lg: "none" }}>
-              <img src={logoUrl} alt="logoUrl" width={64}></img>
+              <img
+                onClick={() => navigate("/")}
+                src={logoUrl}
+                alt="logoUrl"
+                width={64}
+                className="Nav-logo"
+              ></img>
             </Stack>
           </Stack>
 
@@ -119,7 +137,7 @@ const NavBar = () => {
               flexDirection="row"
               alignItems="center"
             >
-              <NavButton>
+              <NavButton onClick={() => navigate("/wlist")}>
                 <BookmarksOutlinedIcon
                   sx={{ marginRight: "4px" }}
                   color="#fff"
@@ -128,13 +146,19 @@ const NavBar = () => {
               </NavButton>
             </Stack>
             <Stack flexDirection="row" alignItems="center">
-              <UserMenu />
-              {/* <Link to="/login">
-                <NavButton>Sign In</NavButton>
-              </Link> */}
+              {currentUser ? (
+                <UserMenu />
+              ) : (
+                <NavButton onClick={() => navigate("/login")}>
+                  Sign In
+                </NavButton>
+              )}
             </Stack>
 
-            <NavButton endIcon={<ArrowDropDownIcon color="info" />}>
+            <NavButton
+              disabled
+              endIcon={<ArrowDropDownIcon color="secondary" />}
+            >
               EN
             </NavButton>
           </Stack>
