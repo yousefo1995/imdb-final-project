@@ -12,7 +12,7 @@ import ErrorMessage from "../components/LoginComponents/ErrorMessage";
 const LoginPage = () => {
   const [loginData, setLoginData] = useState({
     email: "",
-    pasword: "",
+    password: "",
   });
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -28,7 +28,9 @@ const LoginPage = () => {
 
   const { email, password } = loginData;
 
-  const handelLogin = async () => {
+  const handelLogin = async (event) => {
+    event.preventDefault();
+
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
       console.log(user);
@@ -96,7 +98,7 @@ const LoginPage = () => {
             fontSize="12px"
             fontWeight="400"
             showborder={true}
-            onClick={handelLogin}
+            type="submit"
           >
             Sign in
           </ImdbButton>
@@ -106,13 +108,7 @@ const LoginPage = () => {
             New to IMDB?
           </Typography>
           <Link to="/signup">
-            <ImdbButton
-              fontSize="12px"
-              fontWeight="400"
-              showborder={true}
-              bg="#EEEFF2"
-              bghover="#DFE2E7"
-            >
+            <ImdbButton fontSize="12px" fontWeight="400" showborder={true}>
               Create your IMDb account
             </ImdbButton>
           </Link>

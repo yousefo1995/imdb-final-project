@@ -13,7 +13,7 @@ const SignUpPage = () => {
   const [signupData, setSignupData] = useState({
     name: "",
     email: "",
-    pasword: "",
+    password: "",
   });
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -30,7 +30,8 @@ const SignUpPage = () => {
 
   const { name, email, password } = signupData;
 
-  const handelRegister = async () => {
+  const handelRegister = async (event) => {
+    event.preventDefault();
     try {
       const user = await createUserWithEmailAndPassword(auth, email, password);
       console.log(user);
@@ -110,7 +111,7 @@ const SignUpPage = () => {
             fontSize="12px"
             fontWeight="400"
             showborder={true}
-            onClick={handelRegister}
+            type="submit"
           >
             Create your IMDb account
           </ImdbButton>
