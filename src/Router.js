@@ -15,14 +15,14 @@ const Router = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route element={<PrivateRoutes logged={false} to="/" />}>
+        <Route element={<PrivateRoutes isLogged={true} to="/" />}>
           <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={<SignUpPage />} />
         </Route>
 
         <Route path="movie" element={<MoviePage />} />
         <Route path="search" element={<SearchPage />} />
-        <Route element={<PrivateRoutes logged={true} to="/login" />}>
+        <Route element={<PrivateRoutes isLogged={false} to="/login" />}>
           <Route path="wlist" element={<WatchlistPage />} />
         </Route>
       </Routes>
