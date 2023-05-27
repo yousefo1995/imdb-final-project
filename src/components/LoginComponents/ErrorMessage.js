@@ -1,17 +1,14 @@
 import React from "react";
 import WarningIcon from "@mui/icons-material/Warning";
 import { Typography } from "@mui/material";
+import { Stack, Box } from "@mui/system";
 const ErrorMessage = ({ children }) => {
   return (
-    <Typography
-      display="flex"
-      alignItems="center"
-      paddingBottom={2}
-      color="error"
-    >
-      <WarningIcon fontSize="small" sx={{ marginRight: "4px" }} />
-      {children}
-    </Typography>
+    <Stack flexDirection="row" paddingBottom={2} maxWidth="80%">
+      <WarningIcon color="error" fontSize="12px" sx={{ marginRight: "4px" }} />
+
+      <Typography color="error">{children}</Typography>
+    </Stack>
   );
 };
 

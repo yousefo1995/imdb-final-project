@@ -8,3 +8,9 @@
   padding-bottom: 2px;
   font-size: 13px;
 }
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

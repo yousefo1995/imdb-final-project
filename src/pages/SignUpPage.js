@@ -34,10 +34,17 @@ const SignUpPage = () => {
     event.preventDefault();
     try {
       const user = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(user);
     } catch (error) {
-      console.log(error.message);
-      setErrorMessage(error.message);
+      let errorMes = "An error occurred while creating an account.";
+
+      if (error.code === "auth/email-already-in-use") {
+        errorMes = "The email address is already in use by another account.";
+      } else if (error.code === "auth/invalid-email") {
+        errorMes = "Invalid email address.";
+      } else if (error.code === "auth/weak-password") {
+        errorMes = "The password is too weak.";
+      }
+      setErrorMessage(errorMes);
     }
   };
 
@@ -70,7 +77,7 @@ const SignUpPage = () => {
         >
           Create account
         </Typography>
-        <form onSubmit={handelRegister}>
+        <form onSubmit={handelRegister} className="login-form">
           <Box display="flex" flexDirection="column" marginBottom={2}>
             <label className="login-label">Your name</label>
             <input

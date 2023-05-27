@@ -33,10 +33,17 @@ const LoginPage = () => {
 
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
-      console.log(user);
     } catch (error) {
-      console.log(error.message);
-      setErrorMessage(error.message);
+      let errorMes = "An error occurred while logging in.";
+
+      if (error.code === "auth/user-disabled") {
+        errorMes = "Your account has been disabled.";
+      } else if (error.code === "auth/user-not-found") {
+        errorMes = "User not found.";
+      } else if (error.code === "auth/wrong-password") {
+        errorMes = "Incorrect password.";
+      }
+      setErrorMessage(errorMes);
     }
   };
 
@@ -69,7 +76,7 @@ const LoginPage = () => {
         >
           Sign in
         </Typography>
-        <form onSubmit={handelLogin}>
+        <form onSubmit={handelLogin} className="login-form">
           <Box display="flex" flexDirection="column" marginBottom={2}>
             <label className="login-label">Email</label>
             <input
