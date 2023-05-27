@@ -2,14 +2,15 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Container } from "@mui/material";
+import { ArrowNext, ArrowBack } from "./Arrows";
+import "./style.css";
 
-import { ArrowBack, ArrowNext } from "./Arrows";
+// for main slide (infinit , showOneSlide and autoplay )= true
 
-const SimpleSlider = ({ children, showOneSlide }) => {
+const SimpleSlider = ({ children, showOneSlide, infinite, autoplay }) => {
   var settings = {
     dots: false,
-    infinite: showOneSlide ? true : false, // for main slide true
+    infinite: infinite | false,
     speed: 500,
     slidesToShow: showOneSlide ? 1 : 6,
     slidesToScroll: showOneSlide ? 1 : 4,
@@ -18,8 +19,8 @@ const SimpleSlider = ({ children, showOneSlide }) => {
     draggable: true,
     centerMode: false,
     touchThreshold: 10,
-    touchMove: false,
-    autoplay: showOneSlide ? true : false,
+    touchMove: true,
+    autoplay: autoplay | false,
     nextArrow: <ArrowNext />,
     prevArrow: <ArrowBack />,
     responsive: [
@@ -49,10 +50,11 @@ const SimpleSlider = ({ children, showOneSlide }) => {
     ],
   };
   return (
-    <Container maxWidth="lg">
-      <h2> Single Item</h2>
-      <Slider {...settings}>{children}</Slider>
-    </Container>
+    <div>
+      <Slider {...settings} className="slider-container">
+        {children}
+      </Slider>
+    </div>
   );
 };
 

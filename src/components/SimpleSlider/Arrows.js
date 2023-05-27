@@ -5,7 +5,11 @@ import IconButtonIMDB from "../Core/IconButtonIMDB/IconButtonIMDB";
 export function ArrowNext(props) {
   const { className, onClick } = props;
   return (
-    <div className={className} onClick={onClick}>
+    <div
+      // className={className}
+      onClick={onClick}
+      className="next-btn"
+    >
       <IconButtonIMDB
         borderR="4px"
         width="48px"
@@ -24,7 +28,11 @@ export function ArrowNext(props) {
 export function ArrowBack(props) {
   const { className, onClick } = props;
   return (
-    <div className={className} onClick={onClick}>
+    <div
+      className="back-btn"
+      onClick={onClick}
+      style={{ position: "absolute", left: "0", zIndex: "1" }}
+    >
       <IconButtonIMDB
         borderR="4px"
         width="48px"
