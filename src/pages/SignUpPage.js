@@ -5,12 +5,13 @@ import { logoUrl } from "../components/NavBar/NavConstants";
 import ImdbButton from "../components/Core/ImdbButton/ImdbButton";
 import "./style/login.css";
 import { Link } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Firebase";
 import ErrorMessage from "../components/LoginComponents/ErrorMessage";
 
-const LoginPage = () => {
-  const [loginData, setLoginData] = useState({
+const SignUpPage = () => {
+  const [signupData, setSignupData] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -19,29 +20,29 @@ const LoginPage = () => {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setLoginData({
-      ...loginData,
+    setSignupData({
+      ...signupData,
       [name]: value,
     });
     setErrorMessage(null);
+    //
   };
 
-  const { email, password } = loginData;
+  const { name, email, password } = signupData;
 
-  const handelLogin = async (event) => {
+  const handelRegister = async (event) => {
     event.preventDefault();
-
     try {
-      const user = await signInWithEmailAndPassword(auth, email, password);
+      const user = await createUserWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      let errorMes = "An error occurred while logging in.";
+      let errorMes = "An error occurred while creating an account.";
 
-      if (error.code === "auth/user-disabled") {
-        errorMes = "Your account has been disabled.";
-      } else if (error.code === "auth/user-not-found") {
-        errorMes = "User not found.";
-      } else if (error.code === "auth/wrong-password") {
-        errorMes = "Incorrect password.";
+      if (error.code === "auth/email-already-in-use") {
+        errorMes = "The email address is already in use by another account.";
+      } else if (error.code === "auth/invalid-email") {
+        errorMes = "Invalid email address.";
+      } else if (error.code === "auth/weak-password") {
+        errorMes = "The password is too weak.";
       }
       setErrorMessage(errorMes);
     }
@@ -74,9 +75,20 @@ const LoginPage = () => {
           color="#111111"
           fontWeight="400"
         >
-          Sign in
+          Create account
         </Typography>
-        <form onSubmit={handelLogin} className="login-form">
+        <form onSubmit={handelRegister} className="login-form">
+          <Box display="flex" flexDirection="column" marginBottom={2}>
+            <label className="login-label">Your name</label>
+            <input
+              name="name"
+              value={name}
+              type="name"
+              onChange={handleChange}
+              className="login-input"
+              placeholder=" First and last name"
+            ></input>
+          </Box>
           <Box display="flex" flexDirection="column" marginBottom={2}>
             <label className="login-label">Email</label>
             <input
@@ -84,8 +96,8 @@ const LoginPage = () => {
               value={email}
               type="email"
               onChange={handleChange}
-              placeholder=" Email"
               className="login-input"
+              placeholder=" Your Email"
             ></input>
           </Box>
           <Box display="flex" flexDirection="column" marginBottom={4}>
@@ -96,28 +108,34 @@ const LoginPage = () => {
               value={password}
               type="password"
               onChange={handleChange}
-              placeholder=" Password"
               className="login-input"
+              placeholder=" at least 8 characters"
             ></input>
           </Box>
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+
           <ImdbButton
             fontSize="12px"
             fontWeight="400"
             showborder={true}
             type="submit"
           >
-            Sign in
+            Create your IMDb account
           </ImdbButton>
         </form>
-        <Stack alignItems="center" marginTop={7}>
-          <Typography fontSize="12px" fontWeight="400" marginBottom={1}>
-            New to IMDB?
+        <Stack flexDirection="row" alignItems="center" marginTop={7}>
+          <Typography fontSize="13px" fontWeight="400" marginBottom={1}>
+            Already have an account?
           </Typography>
-          <Link to="/signup">
-            <ImdbButton fontSize="12px" fontWeight="400" showborder={true}>
-              Create your IMDb account
-            </ImdbButton>
+          <Link to="/login">
+            <Typography
+              marginLeft={1}
+              marginBottom={1}
+              fontSize="13px"
+              color="info.main"
+            >
+              sign in
+            </Typography>
           </Link>
         </Stack>
       </Box>
@@ -125,4 +143,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
