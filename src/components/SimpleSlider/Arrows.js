@@ -1,49 +1,79 @@
-import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
-import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import { Stack } from "@mui/material";
 import IconButtonIMDB from "../Core/IconButtonIMDB/IconButtonIMDB";
-
-export function ArrowNext(props) {
-  const { className, onClick } = props;
+export function BackArrow({
+  onClick,
+  children,
+  buttonHeight,
+  ButtonsDisplay,
+  currentSlide,
+}) {
   return (
-    <div
-      // className={className}
-      onClick={onClick}
-      className="next-btn"
-    >
-      <IconButtonIMDB
-        borderR="4px"
-        width="48px"
-        height="64px"
-        bg="rgb(18, 18, 18, 0.45)"
-        hoverBg="rgb(18, 18, 18, 0.45)"
-        iconHover="#f5c518"
-        iconSize="30px"
-      >
-        <ArrowForwardIosRoundedIcon />
-      </IconButtonIMDB>
-    </div>
+    <>
+      {currentSlide !== 0 && (
+        <Stack
+          onClick={onClick}
+          display={ButtonsDisplay}
+          style={{
+            bottom: buttonHeight,
+            position: "absolute",
+            left: "0",
+            zIndex: 1,
+          }}
+        >
+          <IconButtonIMDB
+            borderR="4px"
+            showBorder={true}
+            width="48px"
+            height="64px"
+            bg="rgb(18, 18, 18, 0.45)"
+            hoverBg="rgb(18, 18, 18, 0.45)"
+            iconHover="#f5c518"
+            iconSize="30px"
+          >
+            {children}
+          </IconButtonIMDB>
+        </Stack>
+      )}
+    </>
   );
 }
 
-export function ArrowBack(props) {
-  const { className, onClick } = props;
+export function NextArrow({
+  onClick,
+  children,
+  buttonHeight,
+  ButtonsDisplay,
+  slideCount,
+  currentSlide,
+  slidesToShow,
+}) {
   return (
-    <div
-      className="back-btn"
-      onClick={onClick}
-      style={{ position: "absolute", left: "0", zIndex: "1" }}
-    >
-      <IconButtonIMDB
-        borderR="4px"
-        width="48px"
-        height="64px"
-        bg="rgb(18, 18, 18, 0.45)"
-        hoverBg="rgb(18, 18, 18, 0.45)"
-        iconHover="#f5c518"
-        iconSize="30px"
-      >
-        <ArrowBackIosRoundedIcon />
-      </IconButtonIMDB>
-    </div>
+    <>
+      {currentSlide !== slideCount - slidesToShow && (
+        <Stack
+          onClick={onClick}
+          display={ButtonsDisplay}
+          style={{
+            bottom: buttonHeight,
+            position: "absolute",
+            right: "0",
+            zIndex: 1,
+          }}
+        >
+          <IconButtonIMDB
+            borderR="4px"
+            showBorder={true}
+            width="48px"
+            height="64px"
+            bg="rgb(18, 18, 18, 0.45)"
+            hoverBg="rgb(18, 18, 18, 0.45)"
+            iconHover="#f5c518"
+            iconSize="30px"
+          >
+            {children}
+          </IconButtonIMDB>
+        </Stack>
+      )}
+    </>
   );
 }
