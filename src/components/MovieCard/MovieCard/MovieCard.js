@@ -23,7 +23,7 @@ const MovieCard = ({
       <CardActionArea disableRipple>
         <CardMedia
           component="img"
-          height="344"
+          // height="274px"
           image={image}
           alt="green iguana"
         />

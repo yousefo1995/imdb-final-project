@@ -1,15 +1,15 @@
-.next-btn {
+/* .next-btn {
   position: absolute;
   right: 0px;
-  bottom: 300px;
+  bottom: 250px;
   z-index: 1;
 }
 .back-btn {
   position: absolute;
   left: 0px;
-  bottom: 300px;
+  bottom: 250px;
   z-index: 1;
-}
+} */
 .slider-container {
   position: relative;
 }
