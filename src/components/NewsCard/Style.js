@@ -12,6 +12,7 @@ const StyledNewsCard = styled(Card)(({ theme }) => ({
   flexDirection: "row",
   paddingLeft: "16px",
   paddingRight: "16px",
+  marginRight: "0.875 rem",
 
   "& .card-image": {
     width: "90px",
