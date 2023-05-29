@@ -1,5 +1,5 @@
 import React from "react";
-import { CardMedia, Box, Typography, CardContent, Stack } from "@mui/material";
+import { CardMedia, Typography, CardContent, Stack } from "@mui/material";
 import StyledNewsCard from "./Style";
 import { cardContentStyles } from "./Style";
 const NewsCard = ({

@@ -8,7 +8,7 @@ import HeaderPlayCard from "./HeaderPlayCard/HeaderPlayCard";
 const HeaderCard = ({
   title = "title",
   time = "0:00",
-  image = "https://picsum.photos/id/870/200/300?grayscale&blur=2",
+  image = "https://picsum.photos/200",
 }) => {
   return (
     <StyledHeaderCard>
