@@ -7,7 +7,7 @@ export const StyledCardContent = styled(CardContent)(({ theme }) => ({
   paddingBottom: "0",
 }));
 const StyledTrailerCard = styled(Card)(({ theme }) => ({
-  backgroundColor: "rgba(18, 18, 18, 0.95)",
+  backgroundColor: "rgba(8, 8, 8, 0.95)",
   display: window.innerWidth <= 1024 ? "none" : "flex",
   alignItems: "center",
   color: "#ffffff",
