@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { NextArrow, BackArrow } from "./Arrows";
+import { Arrow } from "./Arrows";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import "./style.css";
@@ -15,12 +15,16 @@ const SimpleSlider = ({
   slidesOnSm = 2.25,
   slidesOnMd = 2.25,
   slidesOnLg = 4.5,
+  slidesOnXl = 4.5,
   slidesScroll = 4,
   slidesScrollOnSm = 1, // 1 for all
   slidesScrollOnMd = 2,
   slidesScrollOnLg = 3,
+  slidesScrollOnXl = 3,
+
   buttonHeight = "250px",
-  ButtonsDisplay = { md: "none", lg: "block" },
+  ButtonsDisplay = { xs: "none", md: "none", lg: "block" },
+  currentSlide,
 }) => {
   var settings = {
     dots: false,
@@ -35,26 +39,33 @@ const SimpleSlider = ({
     touchMove: true,
     autoplay: autoplay,
     nextArrow: (
-      <NextArrow
+      <Arrow
         buttonHeight={buttonHeight}
         ButtonsDisplay={ButtonsDisplay}
         slidesToShow={slidesToShow}
+        isLeft={false}
       >
         <ArrowForwardIosRoundedIcon />
-      </NextArrow>
+      </Arrow>
     ),
     prevArrow: (
-      <BackArrow buttonHeight={buttonHeight} ButtonsDisplay={ButtonsDisplay}>
+      <Arrow buttonHeight={buttonHeight} ButtonsDisplay={ButtonsDisplay}>
         <ArrowBackIosRoundedIcon />
-      </BackArrow>
+      </Arrow>
     ),
     responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: slidesOnXl,
+          slidesToScroll: slidesScrollOnXl,
+        },
+      },
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: slidesOnLg,
           slidesToScroll: slidesScrollOnLg,
-          infinite: true,
         },
       },
       {
