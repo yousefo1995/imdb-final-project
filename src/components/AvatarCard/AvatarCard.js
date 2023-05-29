@@ -1,7 +1,11 @@
 import React from "react";
 import { Avatar, Stack, Typography } from "@mui/material";
 import { avatarStyle } from "./style";
-const AvatarCard = ({ name = "actor name", image, age = "00" }) => {
+const AvatarCard = ({
+  name = "actor name",
+  image = "https://picsum.photos/200",
+  age = "00",
+}) => {
   return (
     <Stack flexDirection="column" alignItems="center">
       <Avatar alt={name} src={image} sx={avatarStyle} />
