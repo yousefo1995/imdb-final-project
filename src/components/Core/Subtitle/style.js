@@ -7,9 +7,14 @@ export const SubtitleLink = styled(Typography)({
   alignItems: "center",
   cursor: "pointer",
   color: "#fff",
+  paddingLeft: "12px",
 
   "& .iconB": {
     transform: "rotate(90deg)",
+    color: "#f5c518",
+    paddingLeft: "0",
+    position: "absolute",
+    left: "-17.5px",
   },
 
   "&:hover": {
