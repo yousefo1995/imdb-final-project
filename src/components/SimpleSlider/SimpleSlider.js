@@ -15,12 +15,12 @@ const SimpleSlider = ({
   slidesOnSm = 2.25,
   slidesOnMd = 2.25,
   slidesOnLg = 4.5,
-  slidesOnXl = 4.5,
-  slidesScroll = 4,
+  slidesOnXl = 6,
+  slidesScroll = 6,
   slidesScrollOnSm = 1, // 1 for all
   slidesScrollOnMd = 2,
-  slidesScrollOnLg = 3,
-  slidesScrollOnXl = 3,
+  slidesScrollOnLg = 4,
+  slidesScrollOnXl = 6,
 
   buttonHeight = "250px",
   ButtonsDisplay = { xs: "none", md: "none", lg: "block" },
