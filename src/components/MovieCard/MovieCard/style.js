@@ -10,6 +10,20 @@ export const StyledCard = styled(Card)(({ theme, showFullCard }) => ({
   backgroundColor: "#1A1A1A",
   maxWidth: "232px",
   marginRight: "0.875rem",
+
+  [theme.breakpoints.down("600")]: {
+    minWidth: "114px",
+    width: "90%",
+  },
+  [theme.breakpoints.between("600", "1023")]: {
+    maxWidth: "90%",
+  },
+  [theme.breakpoints.between("1024", "1279")]: {
+    width: "152px",
+  },
+  [theme.breakpoints.up("1280")]: {
+    width: "186px",
+  },
 }));
 
 export const StyledIconButtonIMDB = styled(IconButtonIMDB)(({ theme }) => ({

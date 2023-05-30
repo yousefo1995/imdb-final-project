@@ -1,21 +1,6 @@
 import React from "react";
-import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import styled from "@emotion/styled";
-
-const StyledButton = styled(Button)(
-  ({ theme, bg, hoverbg, width, rightBorderRadious, leftBorderRadious }) => ({
-    backgroundColor: bg,
-    padding: "0 16px",
-    width: width,
-    height: "36px",
-    borderTopLeftRadius: !leftBorderRadious && "0",
-    borderBottomLeftRadius: !leftBorderRadious && "0",
-    borderTopRightRadius: !rightBorderRadious && "0",
-    borderBottomRightRadius: !rightBorderRadious && "0",
-    "&:hover": { backgroundColor: hoverbg },
-  })
-);
+import { StyledButton } from "./style";
 const StyledCardButton = ({
   children,
   bg = "#2C2C2C",
