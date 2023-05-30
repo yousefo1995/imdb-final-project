@@ -1,26 +1,23 @@
 import React from "react";
-import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import styled from "@emotion/styled";
-import { Box, width } from "@mui/system";
-
-const StyledCardButtom = styled(Button)(({ theme, bg, hoverbg, width }) => ({
-  backgroundColor: bg,
-  padding: "0 16px",
-  width: width,
-  height: "36px",
-
-  "&:hover": { backgroundColor: hoverbg },
-}));
+import { StyledButton } from "./style";
 const StyledCardButton = ({
   children,
   bg = "#2C2C2C",
   hoverbg = "#30353C",
   width = "216px",
   color = "info.main",
+  rightBorderRadious = true,
+  leftBorderRadious = true,
 }) => {
   return (
-    <StyledCardButtom bg={bg} hoverbg={hoverbg} width={width}>
+    <StyledButton
+      bg={bg}
+      hoverbg={hoverbg}
+      width={width}
+      rightBorderRadious={rightBorderRadious}
+      leftBorderRadious={leftBorderRadious}
+    >
       <Typography
         variant="button"
         color={color}
@@ -30,7 +27,7 @@ const StyledCardButton = ({
       >
         {children}
       </Typography>{" "}
-    </StyledCardButtom>
+    </StyledButton>
   );
 };
 

@@ -14,7 +14,7 @@ const Subtitle = ({
   ...res
 }) => {
   return (
-    <SubtitleLink variant="h2" href="#" {...res}>
+    <SubtitleLink variant="h2" href="#" position="relative" {...res}>
       {showStartIcon && (
         <HorizontalRuleIcon fontSize="large" className="iconB" />
       )}
