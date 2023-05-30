@@ -17,8 +17,8 @@ const StyledTrailerCard = styled(Card)(({ theme }) => ({
   paddingRight: "16px",
 
   "& .card-image": {
-    width: "112px",
-    height: "112px",
+    // width: "112px",
+    // height: "112px",
     marginRight: "16px",
   },
 
@@ -28,17 +28,28 @@ const StyledTrailerCard = styled(Card)(({ theme }) => ({
     height: "112px",
     paddingLeft: "8px",
     paddingRight: "8px",
+    "& .card-image": {
+      width: "68px",
+      height: "98px",
+    },
   },
 
   [theme.breakpoints.up("1280")]: {
     width: "372px",
 
     height: "148px",
+    "& .card-image": {
+      width: "88px",
+      height: "132px",
+      marginRight: "16px",
+    },
   },
+
   "& .play-icon": {
-    fontSize: "32px",
+    fontSize: "36px",
     marginRight: "8px",
   },
+
   "&:hover": {
     "& .play-icon": {
       color: theme.palette.secondary.main,

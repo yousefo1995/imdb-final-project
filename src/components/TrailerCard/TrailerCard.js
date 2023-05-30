@@ -11,7 +11,7 @@ const TrailerCard = ({
 }) => {
   return (
     <StyledTrailerCard>
-      <Stack flexDirection="row" alignItems="center">
+      <Stack flexDirection="row" alignItems="center" paddingTop={2}>
         <CardMedia component="img" image={image} className="card-image" />
       </Stack>
       <StyledCardContent>
