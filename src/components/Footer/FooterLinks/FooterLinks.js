@@ -9,7 +9,7 @@ const FooterLinks = ({ children }) => {
       fontSize="1.2em"
       display="flex"
       alignItems="center"
-      padding={2}
+      padding={1}
     >
       {children}
       <LaunchIcon fontSize="inherit" />

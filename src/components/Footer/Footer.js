@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import Button from "@mui/material/Button";
 
 import FooterLinks from "./FooterLinks/FooterLinks";
 import SocialiconButton from "./SocialiconButton/SocialiconButton";
-
+import ImdbButton from "../Core/ImdbButton/ImdbButton";
 import axios from "axios";
-import { Container } from "@mui/system";
 const Footer = () => {
   const [list, setList] = useState([]);
 
@@ -24,10 +22,11 @@ const Footer = () => {
 
   return (
     <Box
-      bgcolor="black"
+      bgcolor="#000"
       display="flex"
       flexDirection="column"
       alignItems="center"
+      paddingBottom={6}
     >
       <Box
         display="flex"
@@ -35,16 +34,19 @@ const Footer = () => {
         alignItems="center"
         width="80%"
       >
-        <Box>
-          <Button size="large" variant="contained" color="secondary">
-            Sign in for more access
-          </Button>
+        <Box marginTop={2}>
+          <ImdbButton width="220px">Sign in for more access</ImdbButton>
         </Box>
-        <Box>
+        <Box marginY={2}>
           <SocialiconButton />
         </Box>
 
-        <Box display="flex" justifyContent="center" flexWrap="wrap">
+        <Box
+          display="flex"
+          justifyContent="center"
+          flexWrap="wrap"
+          width={{ xs: "360px", md: "600px", lg: "1024px" }}
+        >
           {list.map((item, i) => {
             return <FooterLinks key={i}>{item.title}</FooterLinks>;
           })}
