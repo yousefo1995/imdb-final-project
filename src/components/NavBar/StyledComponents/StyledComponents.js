@@ -1,6 +1,6 @@
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
-
+import { Toolbar } from "@mui/material";
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -9,10 +9,8 @@ export const Search = styled("div")(({ theme }) => ({
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginRight: theme.spacing(2),
-  // marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
-    // marginLeft: theme.spacing(3),
     width: "auto",
   },
 }));
@@ -41,4 +39,15 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
       width: "20ch",
     },
   },
+}));
+
+export const StyledToolBar = styled(Toolbar)(({ theme }) => ({
+  "&.MuiToolbar-root": {
+    paddingLeft: 0,
+    paddingRight: 0,
+  },
+  // maxWidth: "xl",
+  alignContent: "stretch",
+  width: "100%",
+  height: "36px",
 }));
