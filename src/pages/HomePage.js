@@ -14,24 +14,30 @@ const HomePage = () => {
   const { currentUser } = useContext(AuthContext);
 
   return (
-    <Stack
-      paddingLeft={{ xxl: "5.5%", xl: "3.5%", lg: "10%", md: "1%" }}
-      paddingRight={{ xxl: "5.5%", xl: "3.5%", lg: "10%", md: "1%" }}
-      bgcolor="#000"
-      alignItems="center"
-      paddingTop={2}
-    >
-      {/* max width effect the trailer section between 1025 and 1150 */}
-      <Stack flexDirection="row" maxWidth="100%">
-        <HeroSliderSec />
-        <TrailersSec />
-      </Stack>
-      <TopPicksSec />
-      {currentUser ? <FromYourWishlistSec /> : <FromYourWishlistForNotLogin />}
+    <Stack bgcolor="#000" alignItems="center">
+      <Stack
+        paddingLeft={{ xxl: "5.5%", xl: "3.5%", md: "1%" }}
+        paddingRight={{ xxl: "5.5%", xl: "3.5%", md: "1%" }}
+        width={{ xs: "100%", md: "100%", lg: "992px", xl: "1232px" }}
+        alignItems="center"
+        paddingTop={2}
+      >
+        {/* max width effect the trailer section between 1025 and 1150 */}
+        <Stack flexDirection="row" width="100%">
+          <HeroSliderSec />
+          <TrailersSec />
+        </Stack>
+        <TopPicksSec />
+        {currentUser ? (
+          <FromYourWishlistSec />
+        ) : (
+          <FromYourWishlistForNotLogin />
+        )}
 
-      <FanFavorites />
-      <BornTodaySection />
-      <TopNewsSection />
+        <FanFavorites />
+        <BornTodaySection />
+        <TopNewsSection />
+      </Stack>
     </Stack>
   );
 };
