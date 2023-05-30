@@ -32,7 +32,12 @@ const HeaderCard = ({
         paddingTop="16px"
         className="info-box"
       >
-        <Stack paddingLeft="16px">
+        <Stack
+          paddingLeft="16px"
+          minWidth="100px"
+          minHeight="132px"
+          maxWidth="180px"
+        >
           <MovieCard showFullCard={false} />
         </Stack>
         <HeaderPlayCard title={title} time={time} />
