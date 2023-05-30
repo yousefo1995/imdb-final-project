@@ -6,12 +6,8 @@ import { arr } from "../Draft";
 
 const HeroSliderSec = () => {
   return (
-    <Stack
-      // maxWidth={{ md: "100%", lg: "678px", xl: "848px" }}
-      maxWidth={{ lg: "65%" }}
-      width="100%"
-    >
-      <Stack maxWidth="1004px">
+    <Stack maxWidth={{ lg: "65%" }} width="100%">
+      <Stack maxWidth={{ md: "100%", lg: "678px", xl: "848px" }}>
         <SimpleSlider
           autoplay={true}
           infinite={true}

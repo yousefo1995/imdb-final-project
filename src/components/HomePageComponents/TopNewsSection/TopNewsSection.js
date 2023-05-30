@@ -24,7 +24,7 @@ const TopNewsSection = () => {
   }, []);
 
   return (
-    <Stack marginTop={4} maxWidth="100%">
+    <Stack marginTop={4} marginBottom={6} maxWidth="100%">
       <Subtitle>Top News</Subtitle>
       <Box display="flex" flexDirection="column" width="100%" marginTop={2}>
         <SimpleSlider

@@ -7,8 +7,12 @@ import FromYourWishlistSec from "../components/HomePageComponents/FromYourWishli
 import TopPicksSec from "../components/HomePageComponents/TopPicksSec/TopPicksSec";
 import HeroSliderSec from "../components/HomePageComponents/HeroSliderSec/HeroSliderSec";
 import TrailersSec from "../components/HomePageComponents/TrailersSec/TrailersSec";
-
+import FromYourWishlistForNotLogin from "../components/HomePageComponents/FromYourWishlistSec/FromYourWishlistForNotLogin";
+import { AuthContext } from "../AuthContext";
+import { useContext } from "react";
 const HomePage = () => {
+  const { currentUser } = useContext(AuthContext);
+
   return (
     <Stack
       paddingLeft={{ xxl: "5.5%", xl: "3.5%", lg: "10%", md: "1%" }}
@@ -23,7 +27,8 @@ const HomePage = () => {
         <TrailersSec />
       </Stack>
       <TopPicksSec />
-      <FromYourWishlistSec />
+      {currentUser ? <FromYourWishlistSec /> : <FromYourWishlistForNotLogin />}
+
       <FanFavorites />
       <BornTodaySection />
       <TopNewsSection />

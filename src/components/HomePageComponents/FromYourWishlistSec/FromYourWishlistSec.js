@@ -7,7 +7,7 @@ import { arr } from "../Draft";
 
 const FromYourWishlistSec = () => {
   return (
-    <Stack paddingTop={2.5} marginTop={3} maxWidth="100%">
+    <Stack paddingTop={2.5} marginTop={3} width="100%">
       <Subtitle minWidth="100%">From your Watchlist</Subtitle>
       <Typography marginTop={1} color="#B3B3B3">
         Movies and TV shows that you have watchlisted{" "}
