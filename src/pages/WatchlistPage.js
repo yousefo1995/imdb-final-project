@@ -1,11 +1,12 @@
 import React from "react";
+import WatchListCard from "../components/WatchListPageComponents/WatchListCard/WatchListCard";
 
-const WatchlistPage = () => {
+const WatchListPage = () => {
   return (
     <div>
-      <h1>Watchlist Page</h1>
+      <WatchListCard />
     </div>
   );
 };
 
-export default WatchlistPage;
+export default WatchListPage;
