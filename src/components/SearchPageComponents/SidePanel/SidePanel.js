@@ -13,7 +13,6 @@ const SidePanel = ({ searchText }) => {
           "https://run.mocky.io/v3/41870d6a-bc1f-41f3-a851-67ec27058c03"
         );
         setList(res.data);
-        console.log(res.data);
       } catch (error) {}
     };
     fetchData();
@@ -25,7 +24,6 @@ const SidePanel = ({ searchText }) => {
           "https://run.mocky.io/v3/b5ff322d-dabb-409e-9318-0e44742f18fb"
         );
         setListAdv(res.data);
-        console.log(res.data);
       } catch (error) {}
     };
     fetchData();

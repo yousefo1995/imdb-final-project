@@ -1,11 +1,11 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Typography, Stack } from "@mui/material";
+import { Typography, Stack } from "@mui/material";
 import { StyledCard, StyledCardContent, StyledCardMedia } from "./style";
 const SearchCard = ({
   movieTitle = "movie title",
   releaseYear = "0000",
-  topActors = "name name ",
-  image = "https://www.nicepng.com/png/detail/762-7623138_icon-movie-play-card-png-and-vector-image.png",
+  titleType = "Title Type",
+  image,
 }) => {
   return (
     <Stack borderBottom="1px solid #E0E0E0">
@@ -26,7 +26,7 @@ const SearchCard = ({
             {releaseYear}
           </Typography>{" "}
           <Typography color="#757575" fontSize="14px" fontWeight="500">
-            {topActors}
+            {titleType}
           </Typography>
         </StyledCardContent>
       </StyledCard>
