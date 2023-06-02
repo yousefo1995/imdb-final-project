@@ -8,6 +8,7 @@ const TrailerCard = ({
   title = "title",
   time = "0:00",
   image = "https://picsum.photos/id/870/200/300?grayscale&blur=2",
+  description,
 }) => {
   return (
     <StyledTrailerCard>
@@ -21,18 +22,24 @@ const TrailerCard = ({
             {time}
           </Typography>
         </Stack>
-        <Subtitle
-          showEndIcon={false}
-          showStartIcon={false}
-          fontWeight="400"
-          overFlow="hidden" // not working
-          textOverflow="ellipsis" //
+        <Typography
+          fontWeight="700"
           fontSize="16px"
+          overflow="hidden"
+          textOverflow="ellipsis"
+          whiteSpace="nowrap"
         >
           {title}
-        </Subtitle>
-        <Typography variant="body2" overflow="hidden" textOverflow="ellipsis">
-          A little description of the movie.
+        </Typography>
+        <Typography
+          fontSize="14px"
+          variant="body2"
+          color="#A8A8A8"
+          overflow="hidden"
+          whiteSpace="nowrap"
+          textOverflow="ellipsis"
+        >
+          {description}
         </Typography>
       </StyledCardContent>
     </StyledTrailerCard>

@@ -11,12 +11,14 @@ import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { Box, Link } from "@mui/material";
 import { StyledCard, StyledIconButtonIMDB } from "./style";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
+import WishBtnCards from "../WishlistBtn/wishBtnCards";
 
 const MovieCard = ({
   title = "title",
   rate = "0.0",
   image = "https://picsum.photos/id/870/200/300?grayscale&blur=2",
   showFullCard = true,
+  key,
 }) => {
   return (
     <StyledCard showFullCard={showFullCard}>
@@ -53,13 +55,18 @@ const MovieCard = ({
             </Box>
 
             <Link href="#" underline="hover" color="#fff">
-              <Typography variant="body1">{title}</Typography>
+              <Typography
+                variant="body1"
+                overflow="hidden"
+                textOverflow="ellipsis"
+                whiteSpace="nowrap"
+              >
+                {title}
+              </Typography>
             </Link>
           </CardContent>
         )}
-        <StyledIconButtonIMDB>
-          <BookmarkAddIcon />
-        </StyledIconButtonIMDB>
+        <WishBtnCards />
       </CardActionArea>
 
       {showFullCard && (
