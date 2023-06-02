@@ -8,16 +8,18 @@ import HeaderPlayCard from "./HeaderPlayCard/HeaderPlayCard";
 const HeaderCard = ({
   title = "title",
   time = "0:00",
-  image = "https://picsum.photos/200",
+  backdropImage = "https://picsum.photos/200",
+  posterImage,
 }) => {
   return (
     <StyledHeaderCard>
       <CardActionArea disableRipple>
         <CardMedia
           component="img"
-          image={image}
+          image={backdropImage}
           className="card-image"
           alt="movie poster"
+          sx={{ maxHeight: { xs: "35vH", sm: "40vH", md: "65vH" } }}
         />
       </CardActionArea>
 
@@ -32,13 +34,8 @@ const HeaderCard = ({
         paddingTop="16px"
         className="info-box"
       >
-        <Stack
-          paddingLeft="16px"
-          minWidth="100px"
-          minHeight="132px"
-          maxWidth="180px"
-        >
-          <MovieCard showFullCard={false} />
+        <Stack paddingLeft="16px">
+          <MovieCard image={posterImage} showFullCard={false} />
         </Stack>
         <HeaderPlayCard title={title} time={time} />
       </Stack>
