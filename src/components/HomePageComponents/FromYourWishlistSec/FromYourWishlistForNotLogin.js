@@ -1,20 +1,16 @@
 import React from "react";
 import { Stack, Typography } from "@mui/material";
 import Subtitle from "../../Core/Subtitle/Subtitle";
-import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
-import IconButtonIMDB from "../../Core/IconButtonIMDB/IconButtonIMDB";
 import ImdbButton from "../../Core/ImdbButton/ImdbButton";
 import { useNavigate } from "react-router";
-
+import WishBtnCards from "../../MovieCard/WishlistBtn/wishBtnCards";
 const FromYourWishlistForNotLogin = () => {
   const navigate = useNavigate();
   return (
     <Stack paddingTop={2.5} marginTop={3} width="100%">
       <Subtitle minWidth="100%">From your Watchlist</Subtitle>
       <Stack alignItems="center" width="100%" marginTop={4} marginBottom={4}>
-        <IconButtonIMDB disabled>
-          <BookmarkAddIcon />
-        </IconButtonIMDB>
+        <WishBtnCards position="relative" bgColor="rgb(90, 90, 90, 1)" />
         <Typography variant="body1" color="#fff">
           Sign in to access your Watchlist
         </Typography>
