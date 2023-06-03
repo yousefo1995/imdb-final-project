@@ -14,7 +14,12 @@ const GridMoviePoster = ({
   return (
     <Card sx={GridMoviePosterStyle}>
       <CardActionArea disableRipple>
-        <CardMedia component="img" image={imageUrl} alt="green iguana" />
+        <CardMedia
+          component="img"
+          image={imageUrl}
+          width="100%"
+          alt="green iguana"
+        />
         {showWishlistBtn && <WishBtnCards width="44px" height="58px" />}
         {showPlayTrailerBtn && (
           <Box

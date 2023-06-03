@@ -41,9 +41,14 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
   }, []);
 
   return (
-    <Box className="gradiant">
-      {/*  // xl ? md ? none */}
-      <Container>
+    <Stack className="gradiant" alignItems="center">
+      <Stack
+        paddingLeft={{ xxl: "5.5%", xl: "3.5%", md: "1%" }}
+        paddingRight={{ xxl: "5.5%", xl: "3.5%", md: "1%" }}
+        width={{ xs: "100%", md: "100%", lg: "992px", xl: "1232px" }}
+        alignItems="center"
+        paddingTop={2}
+      >
         <MoviePageHeadInfo
           duration={data.runtime}
           MovieName={data.title}
@@ -53,22 +58,22 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
           numberOfRates={data.vote_count}
           popularity={data.popularity}
         />
-        <Grid container spacing={0.5}>
-          <Grid item display={{ xs: "none", md: "block" }} lg={3} md={3}>
+        <Grid container spacing={1}>
+          <Grid item display={{ xs: "none", md: "block" }} lg={2.7} md={3.3}>
             <GridMoviePoster
               showPlayTrailerBtn={false}
               imagePath={data.poster_path}
             />
           </Grid>
-          <Grid item xs={12} md={9} lg={7}>
-            <Box bgcolor="blue">
+          <Grid item xs={12} md={8.55} lg={7}>
+            <Box>
               <GridMoviePoster
                 imagePath={data.backdrop_path}
                 showWishlistBtn={false}
               />
             </Box>
           </Grid>
-          <Grid item container md={12} lg={2} spacing={0.5}>
+          <Grid item container md={12} lg={2.25} spacing={0.5}>
             <Grid item xs={6} lg={12}>
               <IconCard icon="videos">3 videos</IconCard>
             </Grid>
@@ -171,8 +176,8 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
             </Grid>
           </Grid>
         </Grid>
-      </Container>
-    </Box>
+      </Stack>
+    </Stack>
   );
 };
 

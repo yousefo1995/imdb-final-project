@@ -24,11 +24,13 @@ const MoviePageHeadInfo = ({
   }
 
   return (
-    <Stack>
+    <Stack width="100%">
       <Stack width="100%" flexDirection="row" justifyContent="space-between">
-        <Subtitle fontSize="16px" showStartIcon={false}>
-          Duration <Typography marginLeft={1}>{duration} min</Typography>
-        </Subtitle>
+        <Stack flexDirection="row" marginLeft={-1.25}>
+          <Subtitle fontSize="16px" showStartIcon={false}>
+            Duration <Typography marginLeft={1}>{duration} min</Typography>
+          </Subtitle>
+        </Stack>
         <Stack flexDirection="row">
           <StyledCardButton
             color="#FFF"
