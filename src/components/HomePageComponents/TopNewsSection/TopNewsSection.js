@@ -9,33 +9,25 @@ import { useState, useEffect } from "react";
 const TopNewsSection = () => {
   const [list, setList] = useState([]);
   const [newsList, setNewsList] = useState([]);
+
+  const fetchData = async (url, setList) => {
+    try {
+      const res = await axios.get(url);
+      setList(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(
-          "https://mocki.io/v1/780394a9-d743-4441-9849-6c08596f7905"
-        );
-        // setNewsList(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    const url = "https://mocki.io/v1/780394a9-d743-4441-9849-6c08596f7905";
+    fetchData(url, setNewsList);
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(
-          "https://mocki.io/v1/9114dcd7-2c8c-4897-851b-2b8d907de11a"
-        );
-        setList(res.data);
-        console.log(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    const url = "https://mocki.io/v1/9114dcd7-2c8c-4897-851b-2b8d907de11a";
+
+    fetchData(url, setList);
   }, []);
 
   return (

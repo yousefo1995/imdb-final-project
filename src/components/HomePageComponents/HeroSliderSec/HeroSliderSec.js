@@ -6,18 +6,18 @@ import axios from "axios";
 
 const HeroSliderSec = () => {
   const [list, setList] = useState([]);
-  useEffect(() => {
-    const options = {
-      method: "GET",
-      url: "https://api.themoviedb.org/3/movie/upcoming",
-      params: { language: "en-US", page: "1" },
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYzdiN2RmZTA2NGQ2MzZhOWRlNWIxYmUzYWVjZjc0OCIsInN1YiI6IjY0NjBiNWY4YTY3MjU0MDBlM2QxYzhkMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FEW-f0nD7r9Pt2Y0z5zNp6haKVhqashRIv0aL6aU6LM",
-      },
-    };
 
+  const options = {
+    method: "GET",
+    url: "https://api.themoviedb.org/3/movie/upcoming",
+    params: { language: "en-US", page: "1" },
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYzdiN2RmZTA2NGQ2MzZhOWRlNWIxYmUzYWVjZjc0OCIsInN1YiI6IjY0NjBiNWY4YTY3MjU0MDBlM2QxYzhkMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FEW-f0nD7r9Pt2Y0z5zNp6haKVhqashRIv0aL6aU6LM",
+    },
+  };
+  useEffect(() => {
     axios
       .request(options)
       .then(function (response) {
@@ -57,7 +57,7 @@ const HeroSliderSec = () => {
                   title={item.title}
                   backdropImage={backdropUrl}
                   posterImage={posterUrl}
-                  key={item.id}
+                  movieId={item.id}
                 />
               </Stack>
             );

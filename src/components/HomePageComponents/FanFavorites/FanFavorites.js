@@ -7,18 +7,17 @@ import axios from "axios";
 
 const FanFavorites = () => {
   const [list, setList] = useState([]);
+  const options = {
+    method: "GET",
+    url: "https://api.themoviedb.org/3/movie/top_rated",
+    params: { language: "en-US", page: "1" },
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYzdiN2RmZTA2NGQ2MzZhOWRlNWIxYmUzYWVjZjc0OCIsInN1YiI6IjY0NjBiNWY4YTY3MjU0MDBlM2QxYzhkMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FEW-f0nD7r9Pt2Y0z5zNp6haKVhqashRIv0aL6aU6LM",
+    },
+  };
   useEffect(() => {
-    const options = {
-      method: "GET",
-      url: "https://api.themoviedb.org/3/movie/top_rated",
-      params: { language: "en-US", page: "1" },
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYzdiN2RmZTA2NGQ2MzZhOWRlNWIxYmUzYWVjZjc0OCIsInN1YiI6IjY0NjBiNWY4YTY3MjU0MDBlM2QxYzhkMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FEW-f0nD7r9Pt2Y0z5zNp6haKVhqashRIv0aL6aU6LM",
-      },
-    };
-
     axios
       .request(options)
       .then(function (response) {
@@ -46,7 +45,7 @@ const FanFavorites = () => {
                   title={item.title}
                   rate={item.vote_average}
                   image={imageUrl}
-                  key={item.id}
+                  movieId={item.id}
                 />
               </Stack>
             );
