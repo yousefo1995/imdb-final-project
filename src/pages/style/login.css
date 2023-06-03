@@ -14,3 +14,7 @@
   flex-direction: column;
   align-items: center;
 }
+
+.logo-imdb-loginPage:hover {
+  cursor: pointer;
+}
