@@ -1,26 +1,21 @@
 import React from "react";
 import CardMedia from "@mui/material/CardMedia";
 import { Card, CardActionArea, Box, Typography } from "@mui/material";
-import { StyledIconButtonIMDB } from "../../MovieCard/MovieCard/style";
-import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import PlayCircleOutlineRoundedIcon from "@mui/icons-material/PlayCircleOutlineRounded";
 import { GridMoviePosterStyle } from "./style";
 import IconButtonIMDB from "../../Core/IconButtonIMDB/IconButtonIMDB";
-
+import WishBtnCards from "../../MovieCard/WishlistBtn/wishBtnCards";
 const GridMoviePoster = ({
-  image = "https://picsum.photos/id/870/200/300?grayscale&blur=2",
+  imagePath,
   showWishlistBtn = true,
   showPlayTrailerBtn = true,
 }) => {
+  const imageUrl = `https://image.tmdb.org/t/p/w500${imagePath}`;
   return (
     <Card sx={GridMoviePosterStyle}>
       <CardActionArea disableRipple>
-        <CardMedia component="img" image={image} alt="green iguana" />
-        {showWishlistBtn && (
-          <StyledIconButtonIMDB>
-            <BookmarkAddIcon />
-          </StyledIconButtonIMDB>
-        )}
+        <CardMedia component="img" image={imageUrl} alt="green iguana" />
+        {showWishlistBtn && <WishBtnCards width="44px" height="58px" />}
         {showPlayTrailerBtn && (
           <Box
             display="flex"

@@ -7,16 +7,27 @@ import ShareIcon from "@mui/icons-material/Share";
 import IconButtonIMDB from "../../Core/IconButtonIMDB/IconButtonIMDB";
 import Subtitle from "../../Core/Subtitle/Subtitle";
 const MoviePageHeadInfo = ({
-  MovieName = "Movie Name",
-  year = "2000",
-  showType = "Tv Show",
-  duration = "00",
+  MovieName,
+  releaseDate = "0000",
+  language,
+  duration,
+  rate,
+  numberOfRates,
+  popularity,
 }) => {
+  const year = releaseDate.slice(0, 4);
+  let languageUpper;
+  if (language) {
+    languageUpper = language.toUpperCase();
+  } else {
+    languageUpper = "";
+  }
+
   return (
     <Stack>
       <Stack width="100%" flexDirection="row" justifyContent="space-between">
         <Subtitle fontSize="16px" showStartIcon={false}>
-          Duration <Typography marginLeft={1}>{duration}</Typography>
+          Duration <Typography marginLeft={1}>{duration} min</Typography>
         </Subtitle>
         <Stack flexDirection="row">
           <StyledCardButton
@@ -56,7 +67,7 @@ const MoviePageHeadInfo = ({
           </Typography>
           <Stack flexDirection="row">
             <Typography color="#D3D3D3" fontSize="14px" marginRight={2}>
-              {showType}
+              {languageUpper}
             </Typography>
             <Typography color="#D3D3D3" fontSize="14px">
               {year}
@@ -64,7 +75,11 @@ const MoviePageHeadInfo = ({
           </Stack>
         </Stack>
         <Box display={{ xs: "none", lg: "block" }}>
-          <MovieRating />
+          <MovieRating
+            rate={rate}
+            numberOfRates={numberOfRates}
+            popularity={popularity}
+          />
         </Box>
       </Stack>
     </Stack>
