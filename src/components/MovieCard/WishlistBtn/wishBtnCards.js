@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.css";
+import styles from "./style.module.css";
 const WishBtnCards = ({
   width = "36px",
   height = "52px",
@@ -11,7 +11,7 @@ const WishBtnCards = ({
 }) => {
   return (
     <div
-      className="btn"
+      className={styles.btn}
       style={{
         width: width,
         height: height,
@@ -22,7 +22,7 @@ const WishBtnCards = ({
       }}
       {...res}
     >
-      <span className="icon">+</span>
+      <span className={styles.icon}>+</span>
     </div>
   );
 };
