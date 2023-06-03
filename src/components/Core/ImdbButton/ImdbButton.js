@@ -2,31 +2,32 @@ import React from "react";
 import { Typography } from "@mui/material";
 import { StyledButton } from "./style";
 
-// props
-// login padding 88px  variant="outlined"
-// isYellow = true/false home padding 32px
-
-// home page black button / padding 32px  color "#5799ef" /bg "#1F1F1F" / bghover "#2F2F2F"
-// home page yellow button / padding 32px
-// login padding 88px showborder fontSize FontWeight
 const ImdbButton = ({
   children,
-  padding = "32px",
+  width = "288px",
   showborder,
   color,
   bg,
   bghover,
+  fontWeight,
+  fontSize,
   ...res
 }) => {
   return (
     <StyledButton
-      padding={padding}
+      width={width}
       showborder={showborder}
       color={color}
       bg={bg}
       bghover={bghover}
+      {...res}
     >
-      <Typography {...res} variant="button">
+      <Typography
+        fontWeight={fontWeight}
+        textTransform="none"
+        fontSize={fontSize}
+        variant="button"
+      >
         {children}
       </Typography>
     </StyledButton>

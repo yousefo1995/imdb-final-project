@@ -2,22 +2,24 @@ import React from "react";
 import { Typography } from "@mui/material";
 import PlayCircleOutlineRoundedIcon from "@mui/icons-material/PlayCircleOutlineRounded";
 import { Stack } from "@mui/system";
-import Subtitle from "../../Core/Subtitle/Subtitle";
-import "./style.css";
 
 const HeaderPlayCard = ({ title, time }) => {
   return (
     <Stack flexDirection="row">
       <PlayCircleOutlineRoundedIcon className="play-icon" />
       <Stack flexDirection="column" justifyContent="space-evenly">
-        <Subtitle
-          showEndIcon={false}
-          showStartIcon={false}
+        <Typography
+          fontSize="24px"
           fontWeight="400"
+          color="#fff"
+          overflow="hidden"
+          whiteSpace="nowrap"
+          textOverflow="ellipsis"
+          width="250px"
           className="header-card-title"
         >
           {title}
-        </Subtitle>
+        </Typography>
         <Typography color="#fff" fontSize="20px" fontWeight="400">
           Watch the Trailer
         </Typography>

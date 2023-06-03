@@ -10,6 +10,21 @@ export const StyledCard = styled(Card)(({ theme, showFullCard }) => ({
   backgroundColor: "#1A1A1A",
   maxWidth: "232px",
   marginRight: "0.875rem",
+
+  [theme.breakpoints.down("600")]: {
+    minWidth: showFullCard ? "114px" : "120px",
+    width: showFullCard ? "90%" : "120px",
+  },
+  [theme.breakpoints.between("600", "1023")]: {
+    maxWidth: showFullCard ? "90%" : "140px",
+    width: showFullCard ? "90%" : "140px",
+  },
+  [theme.breakpoints.between("1024", "1279")]: {
+    width: showFullCard ? "152px" : "132px",
+  },
+  [theme.breakpoints.up("1280")]: {
+    width: showFullCard ? "186px" : "164px",
+  },
 }));
 
 export const StyledIconButtonIMDB = styled(IconButtonIMDB)(({ theme }) => ({

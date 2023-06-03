@@ -4,7 +4,7 @@ const IconButtonIMDB = ({
   children,
   iconSize,
   borderR,
-  showborder,
+  showBorder,
   iconColor,
   width,
   height,
@@ -16,6 +16,7 @@ const IconButtonIMDB = ({
   return (
     <StyledIconButton
       iconSize={iconSize}
+      showBorder={showBorder}
       borderR={borderR}
       iconColor={iconColor}
       width={width}
