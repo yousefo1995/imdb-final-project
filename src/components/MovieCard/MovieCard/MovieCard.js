@@ -9,20 +9,28 @@ import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { Box, Link } from "@mui/material";
-import { StyledCard, StyledIconButtonIMDB } from "./style";
-import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
+import { StyledCard } from "./style";
 import WishBtnCards from "../WishlistBtn/wishBtnCards";
+import { useNavigate } from "react-router";
 
 const MovieCard = ({
   title = "title",
   rate = "0.0",
   image = "https://picsum.photos/id/870/200/300?grayscale&blur=2",
   showFullCard = true,
-  key,
+  movieId,
 }) => {
+  const navigate = useNavigate();
+  const watchListHandler = (e) => {
+    e.stopPropagation();
+    console.log("click on watchList");
+  };
+  const cardHandler = () => {
+    navigate(`/movie/${movieId}`);
+  };
   return (
     <StyledCard showFullCard={showFullCard}>
-      <CardActionArea disableRipple>
+      <CardActionArea disableRipple onClick={cardHandler}>
         <CardMedia
           component="img"
           // height="274px"
@@ -66,14 +74,14 @@ const MovieCard = ({
             </Link>
           </CardContent>
         )}
-        <WishBtnCards />
+        <WishBtnCards onClick={watchListHandler} />
       </CardActionArea>
 
       {showFullCard && (
         <Box>
           {" "}
           <CardActions>
-            <StyledCardButton>
+            <StyledCardButton onClick={watchListHandler}>
               <AddIcon fontSize="small" />
               WatchList
             </StyledCardButton>
