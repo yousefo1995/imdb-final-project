@@ -8,7 +8,8 @@ const NotFoundPage = () => {
       height="50vH"
       justifyContent="center"
       alignItems="center"
-      marginTop={10}
+      marginTop={8}
+      marginBottom={6}
     >
       <Stack width="50%">
         <Typography>
