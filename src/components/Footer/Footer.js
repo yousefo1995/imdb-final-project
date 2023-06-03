@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import FooterLinks from "./FooterLinks/FooterLinks";
 import SocialiconButton from "./SocialiconButton/SocialiconButton";
 import ImdbButton from "../Core/ImdbButton/ImdbButton";
 import axios from "axios";
+import { useNavigate } from "react-router";
 const Footer = () => {
   const [list, setList] = useState([]);
+  const navigate = useNavigate();
 
+  const navToLogin = () => {
+    navigate("/login");
+  };
+
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(
+        "https://run.mocky.io/v3/213253b8-9d95-4f9c-9f6a-5616ca2229d8"
+      );
+      setList(res.data);
+    } catch (error) {}
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(
-          "https://run.mocky.io/v3/213253b8-9d95-4f9c-9f6a-5616ca2229d8"
-        );
-        setList(res.data);
-      } catch (error) {}
-    };
     fetchData();
   }, []);
 
@@ -35,7 +41,9 @@ const Footer = () => {
         width="80%"
       >
         <Box marginTop={2}>
-          <ImdbButton width="220px">Sign in for more access</ImdbButton>
+          <ImdbButton width="220px" onClick={navToLogin}>
+            Sign in for more access
+          </ImdbButton>
         </Box>
         <Box marginY={2}>
           <SocialiconButton />
