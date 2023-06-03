@@ -17,7 +17,9 @@ const TopNewsSection = () => {
           "https://run.mocky.io/v3/e8eb5182-f591-4d42-8b9b-f265ec8aa907"
         );
         setList(res.data);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchData();
   }, []);
