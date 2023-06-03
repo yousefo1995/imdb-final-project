@@ -5,18 +5,32 @@ import { Stack, Box, Typography, Chip } from "@mui/material";
 import Subtitle from "../../Core/Subtitle/Subtitle";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { arr } from "../Draft";
 
 const TopNewsSection = () => {
   const [list, setList] = useState([]);
+  const [newsList, setNewsList] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          "https://mocki.io/v1/780394a9-d743-4441-9849-6c08596f7905"
+        );
+        // setNewsList(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          "https://run.mocky.io/v3/e8eb5182-f591-4d42-8b9b-f265ec8aa907"
+          "https://mocki.io/v1/9114dcd7-2c8c-4897-851b-2b8d907de11a"
         );
         setList(res.data);
+        console.log(res.data);
       } catch (error) {
         console.log(error);
       }
@@ -41,8 +55,13 @@ const TopNewsSection = () => {
           slidesScrollOnXl={3}
           buttonHeight="30%"
         >
-          {arr.map((item) => (
-            <NewsCard />
+          {newsList.map((item) => (
+            <NewsCard
+              title={item.title}
+              source={item.source}
+              image={item.image}
+              date={item.date}
+            />
           ))}
         </SimpleSlider>
       </Box>

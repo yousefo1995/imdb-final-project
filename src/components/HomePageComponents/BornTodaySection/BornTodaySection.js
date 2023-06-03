@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Stack, Box, Typography } from "@mui/material";
 import SimpleSlider from "../../SimpleSlider/SimpleSlider";
 import Title from "../../Core/Title/Title";
 import Subtitle from "../../Core/Subtitle/Subtitle";
 import TodayDate from "./TodayDate";
 import AvatarCard from "../../AvatarCard/AvatarCard";
-import { arr } from "../Draft";
+import axios from "axios";
 
 const BornTodaySection = () => {
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          "https://mocki.io/v1/4129a9c5-ba16-4570-a0e7-84694b62133b"
+        );
+        setList(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <Stack marginTop={4} maxWidth="100%">
       <Title marginBottom={2.5}>More to explore</Title>
@@ -25,8 +40,8 @@ const BornTodaySection = () => {
           slidesToShow={6}
           buttonHeight="50%"
         >
-          {arr.map((item) => (
-            <AvatarCard />
+          {list.map((item) => (
+            <AvatarCard image={item.image} name={item.name} age={item.age} />
           ))}
         </SimpleSlider>
       </Box>
