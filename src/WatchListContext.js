@@ -19,11 +19,14 @@ const WatchListContextProvider = ({ children }) => {
     localStorage.setItem("watchList", JSON.stringify(watchList));
   }, [watchList]);
   const addToWatchList = (movieData) => {
-    setWatchList((prev) => [...prev, movieData]);
+    const isDuplicate = watchList.find((movie) => movie.id === movieData.id);
+    if (!isDuplicate) {
+      setWatchList((prev) => [...prev, movieData]);
+    }
   };
 
   const deleteFromWatchList = (movieId) => {
-    setWatchList((prev) => prev.filter((movie) => movie.id != movieId));
+    setWatchList((prev) => prev.filter((movie) => movie.id !== movieId));
   };
 
   return (

@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import "./style.css";
 
-const SortBySelect = ({ handleSortChange }) => {
+const SortBySelect = ({ handleSortChange, setAscending }) => {
   const [selectedValue, setSelectedValue] = useState("");
 
   const handleSelectChange = (event) => {

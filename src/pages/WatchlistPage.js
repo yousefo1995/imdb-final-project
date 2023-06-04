@@ -10,13 +10,46 @@ import { clearBtn, dividerStyles } from "./style/WatchListstyles";
 import SortBySelect from "../components/WatchListPageComponents/SortBySelect/SortBySelect";
 import { WatchListContext } from "../WatchListContext";
 
-const WatchListPage = ({ WishListLength = "0" }) => {
+const WatchListPage = () => {
   const [showGrid, setShowGrid] = useState(false);
   const { watchList, setWatchList, deleteFromWatchList } =
     useContext(WatchListContext);
+  const [sortBy, setSortBy] = useState("");
+  const [ascendingToggle, setAscendingToggle] = useState(true);
+  const [editToggle, setEditToggle] = useState(false);
+  const sortedWatchList = [...watchList];
 
   const handelGridCards = () => {
     setShowGrid(!showGrid);
+  };
+
+  const handleSortChange = (value) => {
+    setSortBy(value);
+  };
+  const handleAscendingToggle = () => setAscendingToggle(!ascendingToggle);
+  const handleEditToggle = () => setEditToggle(!editToggle);
+  if (sortBy === "release-date") {
+    sortedWatchList.sort((a, b) => {
+      return ascendingToggle
+        ? new Date(a.release_date) - new Date(b.release_date)
+        : new Date(b.release_date) - new Date(a.release_date);
+    });
+  } else if (sortBy === "rating") {
+    sortedWatchList.sort((a, b) => {
+      return ascendingToggle
+        ? a.vote_average - b.vote_average
+        : b.vote_average - a.vote_average;
+    });
+  } else {
+    ascendingToggle && sortedWatchList.reverse();
+  }
+
+  const handleClear = () => {
+    setWatchList([]);
+    localStorage.setItem("watchList", JSON.stringify([]));
+  };
+  const handleDeleteItem = (movieId) => {
+    deleteFromWatchList(movieId);
   };
 
   return (
@@ -66,13 +99,17 @@ const WatchListPage = ({ WishListLength = "0" }) => {
                 color="#5A5A5A"
               >
                 <Stack alignItems="center">
-                  <EditRoundedIcon />
+                  <IconButton onClick={handleEditToggle}>
+                    <EditRoundedIcon />
+                  </IconButton>
                   <Typography fontWeight="400" fontSize="13px">
                     EDIT
                   </Typography>
                 </Stack>
                 <Stack alignItems="center">
-                  <ShareRoundedIcon />
+                  <IconButton disabled>
+                    <ShareRoundedIcon />{" "}
+                  </IconButton>
                   <Typography fontWeight="400" fontSize="13px">
                     SHARE
                   </Typography>
@@ -90,18 +127,21 @@ const WatchListPage = ({ WishListLength = "0" }) => {
             >
               <Stack>
                 <Typography fontSize="13px" fontWeight="400">
-                  {WishListLength} Titles
+                  {watchList.length} Titles
                 </Typography>
               </Stack>
               <Stack flexDirection="row" alignItems="center">
-                <SortBySelect />
-                <IconButton>
+                <SortBySelect
+                  handleSortChange={handleSortChange}
+                  setAscendingToggle={setAscendingToggle}
+                />
+                <IconButton onClick={handleAscendingToggle}>
                   <ImportExportIcon />
                 </IconButton>
                 <IconButton onClick={handelGridCards}>
                   <AppsRoundedIcon />
                 </IconButton>
-                <Button variant="outlined" sx={clearBtn}>
+                <Button variant="outlined" sx={clearBtn} onClick={handleClear}>
                   Clear
                 </Button>
               </Stack>
@@ -114,18 +154,31 @@ const WatchListPage = ({ WishListLength = "0" }) => {
               paddingX={2.5}
               bgcolor="#fff"
             >
-              {watchList.map((movie) => (
-                <WatchListCard
-                  movieId={movie.id}
-                  movieTitle={movie.title}
-                  showGrid={showGrid}
-                  year={movie.release_date}
-                  language={movie.original_language}
-                  popularty={movie.popularity}
-                  rate={movie.vote_average}
-                  description={movie.overview}
-                  image={movie.poster_path}
-                />
+              {sortedWatchList.map((movie) => (
+                <Stack
+                  flexDirection={showGrid ? "column" : "row"}
+                  alignItems="center"
+                >
+                  <WatchListCard
+                    movieId={movie.id}
+                    movieTitle={movie.title}
+                    showGrid={showGrid}
+                    year={movie.release_date}
+                    language={movie.original_language}
+                    popularty={movie.popularity}
+                    rate={movie.vote_average}
+                    description={movie.overview}
+                    image={movie.poster_path}
+                  />
+                  <Stack display={editToggle || "none"}>
+                    <Button
+                      variant="outlined"
+                      onClick={() => handleDeleteItem(movie.id)}
+                    >
+                      delete
+                    </Button>
+                  </Stack>
+                </Stack>
               ))}
             </Stack>
           </Stack>
