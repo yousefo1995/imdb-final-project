@@ -14,6 +14,7 @@ export const StyledCardMedia = styled(CardMedia)(({ theme, showGrid }) => ({
   height: showGrid ? "216px" : "142px",
   paddingY: "0.5rem",
   marginBottom: "12px",
+  cursor: "pointer",
 }));
 
 export const StyledCardContent = styled(CardContent)(({ theme, showGrid }) => ({

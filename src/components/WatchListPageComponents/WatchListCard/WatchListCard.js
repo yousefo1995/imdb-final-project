@@ -8,38 +8,61 @@ import {
   StyledCardMedia,
   dividerStyles,
 } from "./Style";
+import {
+  stringSlice,
+  wordsUpperCase,
+} from "../../../functions/stringFunctions";
+import { toIntegar, toKValue } from "../../../functions/numberFunctions";
+import { useNavigate } from "react-router";
 
 const WatchListCard = ({
   showGrid = false, //list or grid
   movieTitle = "Movie Title",
-  topActors = "name name ",
-  image = "https://www.nicepng.com/png/detail/762-7623138_icon-movie-play-card-png-and-vector-image.png",
+  topActors = "Actors ",
+  image = "",
   year = "0000",
   duration = "0h 0m",
-  category = "category",
+  language = "language",
   rate = "0.0",
+  popularty,
   description = "Movie description",
+  movieId,
 }) => {
+  const languageUpper = wordsUpperCase(language);
+  const yearSlice = stringSlice(year);
+  const newPopularty = toKValue(popularty);
+  const intRate = toIntegar(rate);
+  const imageUrl = `https://image.tmdb.org/t/p/w500${image}`;
+  const navigate = useNavigate();
   return (
     <Stack borderBottom="1px solid #E0E0E0" paddingY={1.25}>
       <StyledCard elevation={0} showGrid={showGrid}>
         <Stack flexDirection={showGrid ? "column" : "row"}>
           <StyledCardMedia
             component="img"
-            image={image}
+            image={imageUrl}
             alt={movieTitle}
             className="card-image"
             showGrid={showGrid}
+            onClick={() => navigate(`/movie/${movieId}`)}
           />
         </Stack>
         <StyledCardContent showGrid={showGrid}>
-          <Typography fontSize="17px" color="#136CB2" fontWeight="400">
+          <Typography
+            fontSize="17px"
+            color="#136CB2"
+            fontWeight="400"
+            overflow="hidden"
+            textOverflow="ellipsis"
+            whiteSpace="nowrap"
+            maxWidth={!showGrid || "124px"}
+          >
             {movieTitle}
           </Typography>{" "}
           {!showGrid && (
             <Stack flexDirection="row">
               <Typography fontSize="12px" fontWeight="400" color="#666666">
-                {year}
+                {yearSlice}
               </Typography>
               <Divider orientation="vertical" flexItem sx={dividerStyles} />
               <Typography fontSize="12px" fontWeight="400" color="#666666">
@@ -47,7 +70,7 @@ const WatchListCard = ({
               </Typography>
               <Divider orientation="vertical" flexItem sx={dividerStyles} />
               <Typography fontSize="12px" fontWeight="400" color="#666666">
-                {category}
+                {languageUpper}
               </Typography>
             </Stack>
           )}
@@ -59,7 +82,7 @@ const WatchListCard = ({
               color="#333333"
               marginRight={1.25}
             >
-              {rate}
+              {intRate}
             </Typography>{" "}
             <StarOutlineRoundedIcon fontSize="12px" color="info" />
             <Typography fontSize="11px" fontWeight="400" color="#136CB2">
@@ -71,7 +94,7 @@ const WatchListCard = ({
               fontWeight="400"
               color="#666666"
             >
-              {year}
+              {newPopularty}
             </Typography>
           </Stack>
           {!showGrid && (
@@ -83,7 +106,14 @@ const WatchListCard = ({
                 </Typography>
                 <Divider orientation="vertical" sx={dividerStyles} />
               </Stack>
-              <Typography fontSize="13px" fontWeight="400" color="#333333">
+              <Typography
+                fontSize="13px"
+                fontWeight="400"
+                color="#333333"
+                height="36px"
+                overflow="hidden"
+                textOverflow="ellipsis"
+              >
                 {description}
               </Typography>{" "}
             </Stack>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Button, Divider, IconButton, Stack, Typography } from "@mui/material";
 import WatchListCard from "../components/WatchListPageComponents/WatchListCard/WatchListCard";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
@@ -8,8 +8,12 @@ import AppsRoundedIcon from "@mui/icons-material/AppsRounded";
 import ImportExportIcon from "@mui/icons-material/ImportExport";
 import { clearBtn, dividerStyles } from "./style/WatchListstyles";
 import SortBySelect from "../components/WatchListPageComponents/SortBySelect/SortBySelect";
+import { WatchListContext } from "../WatchListContext";
+
 const WatchListPage = ({ WishListLength = "0" }) => {
   const [showGrid, setShowGrid] = useState(false);
+  const { watchList, setWatchList, deleteFromWatchList } =
+    useContext(WatchListContext);
 
   const handelGridCards = () => {
     setShowGrid(!showGrid);
@@ -23,7 +27,11 @@ const WatchListPage = ({ WishListLength = "0" }) => {
         width={{ xs: "100%", md: "100%", lg: "992px", xl: "1232px" }}
         alignItems="center"
       >
-        <Stack flexDirection={{ xs: "column", lg: "row" }} width="100%">
+        <Stack
+          flexDirection={{ xs: "column", lg: "row" }}
+          width="100%"
+          minHeight="100vh"
+        >
           <Stack
             width={{ xs: "100%", lg: "625px", xl: "800px" }}
             paddingTop={3}
@@ -106,12 +114,19 @@ const WatchListPage = ({ WishListLength = "0" }) => {
               paddingX={2.5}
               bgcolor="#fff"
             >
-              <WatchListCard showGrid={showGrid} />
-              <WatchListCard showGrid={showGrid} />
-              <WatchListCard showGrid={showGrid} />
-              <WatchListCard showGrid={showGrid} />
-              <WatchListCard showGrid={showGrid} />
-              <WatchListCard showGrid={showGrid} />
+              {watchList.map((movie) => (
+                <WatchListCard
+                  movieId={movie.id}
+                  movieTitle={movie.title}
+                  showGrid={showGrid}
+                  year={movie.release_date}
+                  language={movie.original_language}
+                  popularty={movie.popularity}
+                  rate={movie.vote_average}
+                  description={movie.overview}
+                  image={movie.poster_path}
+                />
+              ))}
             </Stack>
           </Stack>
           <Stack
