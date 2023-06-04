@@ -1,35 +1,15 @@
 import React from "react";
-import StyledCardButton from "../../MovieCard/StyledCardButton/StyledCardButton";
-import { Stack, Typography, Box } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import MovingSharpIcon from "@mui/icons-material/MovingSharp";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import MovieRatingComponent from "./MovieRatingComponent";
-
+import { toIntegar, toKValue } from "../../../functions/numberFunctions";
 const MovieRating = ({
   rate = "0.0",
   numberOfRates = "00k",
   popularity = "00",
 }) => {
-  const toIntegar = (value) => {
-    if (value) {
-      value = parseFloat(value, 10.0).toFixed(1);
-    } else {
-      value = "00";
-    }
-    return value;
-  };
-  const toKValue = (value) => {
-    if (value > 1000) {
-      const kValue = value / 1000;
-      value = toIntegar(kValue) + "k";
-      return value;
-    } else {
-      value = "";
-    }
-    return value;
-  };
-
   const populartyKvalue = toKValue(popularity);
   const intRate = toIntegar(rate);
   const numberOfRatesKvalue = toKValue(numberOfRates);

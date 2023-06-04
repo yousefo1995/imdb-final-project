@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
@@ -12,6 +12,7 @@ import { Box, Link } from "@mui/material";
 import { StyledCard } from "./style";
 import WishBtnCards from "../WishlistBtn/wishBtnCards";
 import { useNavigate } from "react-router";
+import { WatchListContext } from "../../../WatchListContext";
 
 const MovieCard = ({
   title = "title",
@@ -19,11 +20,14 @@ const MovieCard = ({
   image = "https://picsum.photos/id/870/200/300?grayscale&blur=2",
   showFullCard = true,
   movieId,
+  movieData,
 }) => {
   const navigate = useNavigate();
+  const { addToWatchList } = useContext(WatchListContext);
+
   const watchListHandler = (e) => {
     e.stopPropagation();
-    console.log("click on watchList");
+    addToWatchList(movieData);
   };
   const cardHandler = () => {
     navigate(`/movie/${movieId}`);
