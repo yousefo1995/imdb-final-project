@@ -58,6 +58,7 @@ const HeroSliderSec = () => {
                   backdropImage={backdropUrl}
                   posterImage={posterUrl}
                   movieId={item.id}
+                  movieData={item}
                 />
               </Stack>
             );
