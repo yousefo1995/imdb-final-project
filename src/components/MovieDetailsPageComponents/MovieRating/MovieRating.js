@@ -11,6 +11,28 @@ const MovieRating = ({
   numberOfRates = "00k",
   popularity = "00",
 }) => {
+  const toIntegar = (value) => {
+    if (value) {
+      value = parseFloat(value, 10.0).toFixed(1);
+    } else {
+      value = "00";
+    }
+    return value;
+  };
+  const toKValue = (value) => {
+    if (value > 1000) {
+      const kValue = value / 1000;
+      value = toIntegar(kValue) + "k";
+      return value;
+    } else {
+      value = "";
+    }
+    return value;
+  };
+
+  const populartyKvalue = toKValue(popularity);
+  const intRate = toIntegar(rate);
+  const numberOfRatesKvalue = toKValue(numberOfRates);
   return (
     <Stack flexDirection="row">
       {/* IMDB Rate */}
@@ -23,7 +45,7 @@ const MovieRating = ({
             display="flex"
             alignItems="center"
           >
-            {rate}{" "}
+            {intRate}{" "}
             <Typography fontSize="16px" color="Rgba(255,255,255,0.7)">
               /10
             </Typography>
@@ -33,7 +55,7 @@ const MovieRating = ({
             fontSize="12px"
             marginLeft={{ xs: "4px" }}
           >
-            {numberOfRates}
+            {numberOfRatesKvalue}
           </Typography>
         </Stack>
       </MovieRatingComponent>
@@ -50,7 +72,7 @@ const MovieRating = ({
       <MovieRatingComponent label="POPULARITY">
         <MovingSharpIcon color="secondary" fontSize="large" />
         <Typography color="#fff" fontSize="20px">
-          {popularity}
+          {populartyKvalue}
         </Typography>
       </MovieRatingComponent>
     </Stack>
