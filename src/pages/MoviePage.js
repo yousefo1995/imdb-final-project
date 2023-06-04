@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import IconCard from "../components/MovieDetailsPageComponents/IconCard/IconCard";
-import { Container, Grid, Typography, Box, Stack } from "@mui/material";
+import { Grid, Typography, Box, Stack } from "@mui/material";
 import GridMoviePoster from "../components/MovieDetailsPageComponents/GridMoviePoster/GridMoviePoster";
 import ImdbChip from "../components/Core/ImdbChip/ImdbChip";
 import MovieRating from "../components/MovieDetailsPageComponents/MovieRating/MovieRating";
@@ -32,7 +32,6 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
         setData(response.data);
       })
       .catch(function (error) {

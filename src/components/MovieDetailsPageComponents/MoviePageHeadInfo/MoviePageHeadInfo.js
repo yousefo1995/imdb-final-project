@@ -1,11 +1,16 @@
 import React from "react";
-import { Stack, Box, Typography, IconButton } from "@mui/material";
+import { Stack, Box, Typography } from "@mui/material";
 import MovieRating from "../MovieRating/MovieRating";
 import StyledCardButton from "../../MovieCard/StyledCardButton/StyledCardButton";
 import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
 import ShareIcon from "@mui/icons-material/Share";
 import IconButtonIMDB from "../../Core/IconButtonIMDB/IconButtonIMDB";
 import Subtitle from "../../Core/Subtitle/Subtitle";
+import {
+  stringSlice,
+  wordsUpperCase,
+} from "../../../functions/stringFunctions";
+
 const MoviePageHeadInfo = ({
   MovieName,
   releaseDate = "0000",
@@ -15,13 +20,8 @@ const MoviePageHeadInfo = ({
   numberOfRates,
   popularity,
 }) => {
-  const year = releaseDate.slice(0, 4);
-  let languageUpper;
-  if (language) {
-    languageUpper = language.toUpperCase();
-  } else {
-    languageUpper = "";
-  }
+  const year = stringSlice(releaseDate);
+  const languageUpper = wordsUpperCase(language);
 
   return (
     <Stack width="100%">
