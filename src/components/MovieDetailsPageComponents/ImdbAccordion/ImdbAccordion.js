@@ -9,7 +9,11 @@ import AccordionData from "./AccordionData";
 const ImdbAccordion = ({ creator, stars }) => {
   return (
     <Box display={{ xs: "block", lg: "none" }}>
-      <Accordion sx={{ bgcolor: "#212121" }}>
+      <Accordion
+        elevation={0}
+        onChange={(e) => e.preventDefault()}
+        sx={{ bgcolor: "#212121" }}
+      >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon sx={{ color: "#FFF" }} />}
           aria-controls="panel1a-content"
