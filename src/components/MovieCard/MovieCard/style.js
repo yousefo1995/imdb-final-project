@@ -12,17 +12,18 @@ export const StyledCard = styled(Card)(({ theme, showFullCard }) => ({
   marginRight: "0.875rem",
 
   [theme.breakpoints.down("600")]: {
-    minWidth: "114px",
-    width: "90%",
+    minWidth: showFullCard ? "114px" : "120px",
+    width: showFullCard ? "90%" : "120px",
   },
   [theme.breakpoints.between("600", "1023")]: {
-    maxWidth: "90%",
+    maxWidth: showFullCard ? "90%" : "140px",
+    width: showFullCard ? "90%" : "140px",
   },
   [theme.breakpoints.between("1024", "1279")]: {
-    width: "152px",
+    width: showFullCard ? "152px" : "132px",
   },
   [theme.breakpoints.up("1280")]: {
-    width: "186px",
+    width: showFullCard ? "186px" : "164px",
   },
 }));
 

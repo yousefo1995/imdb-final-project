@@ -9,6 +9,7 @@ const StyledCardButton = ({
   color = "info.main",
   rightBorderRadious = true,
   leftBorderRadious = true,
+  ...res
 }) => {
   return (
     <StyledButton
@@ -17,6 +18,7 @@ const StyledCardButton = ({
       width={width}
       rightBorderRadious={rightBorderRadious}
       leftBorderRadious={leftBorderRadious}
+      {...res}
     >
       <Typography
         variant="button"
