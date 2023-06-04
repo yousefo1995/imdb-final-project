@@ -46,6 +46,7 @@ const FanFavorites = () => {
                   rate={item.vote_average}
                   image={imageUrl}
                   movieId={item.id}
+                  movieData={item}
                 />
               </Stack>
             );
