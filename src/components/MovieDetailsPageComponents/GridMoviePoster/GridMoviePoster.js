@@ -9,6 +9,8 @@ const GridMoviePoster = ({
   imagePath,
   showWishlistBtn = true,
   showPlayTrailerBtn = true,
+  data,
+  watchListHandler,
 }) => {
   const imageUrl = `https://image.tmdb.org/t/p/w500${imagePath}`;
   return (
@@ -20,7 +22,13 @@ const GridMoviePoster = ({
           width="100%"
           alt="green iguana"
         />
-        {showWishlistBtn && <WishBtnCards width="44px" height="58px" />}
+        {showWishlistBtn && (
+          <WishBtnCards
+            width="44px"
+            height="58px"
+            onClick={() => watchListHandler(data)}
+          />
+        )}
         {showPlayTrailerBtn && (
           <Box
             display="flex"
