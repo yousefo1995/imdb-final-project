@@ -29,6 +29,7 @@ const TopPicksSec = () => {
         console.error(error);
       });
   }, []);
+
   return (
     <Stack marginTop={6} maxWidth="100%">
       <Title marginBottom={2.5}>What to watch</Title>
@@ -48,6 +49,7 @@ const TopPicksSec = () => {
                   rate={item.vote_average}
                   image={imageUrl}
                   movieId={item.id}
+                  movieData={item}
                 />
               </Stack>
             );

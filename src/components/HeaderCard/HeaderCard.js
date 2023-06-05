@@ -12,12 +12,9 @@ const HeaderCard = ({
   backdropImage = "https://picsum.photos/200",
   posterImage,
   movieId,
+  movieData,
 }) => {
   const navigate = useNavigate();
-  const watchListHandler = (e) => {
-    e.stopPropagation();
-    console.log("click on watchList");
-  };
   const cardHandler = () => {
     navigate(`/movie/${movieId}`);
   };
@@ -51,6 +48,7 @@ const HeaderCard = ({
             image={posterImage}
             showFullCard={false}
             movieId={movieId}
+            movieData={movieData}
           />
         </Stack>
         <HeaderPlayCard title={title} time={time} />

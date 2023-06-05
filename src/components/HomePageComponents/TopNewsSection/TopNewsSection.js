@@ -45,6 +45,7 @@ const TopNewsSection = () => {
           slidesScrollOnLg={2}
           slidesOnXl={2.7}
           slidesScrollOnXl={3}
+          infinite={true}
           buttonHeight="30%"
         >
           {newsList.map((item) => (

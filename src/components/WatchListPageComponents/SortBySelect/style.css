@@ -1,0 +1,10 @@
+.sortSelector {
+  border: 1px solid rgb(118, 118, 118);
+  border-radius: 3px;
+  outline-offset: none;
+  outline: none;
+  color: #5a5a5a;
+  font-weight: 400;
+  width: 168px;
+  height: 24px;
+}
