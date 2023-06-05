@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Firebase";
 import ErrorMessage from "../components/LoginComponents/ErrorMessage";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [loginData, setLoginData] = useState({
@@ -47,6 +48,12 @@ const LoginPage = () => {
     }
   };
 
+  const navigate = useNavigate();
+
+  const navToHome = () => {
+    navigate("/");
+  };
+
   return (
     <Box
       display="flex"
@@ -55,7 +62,13 @@ const LoginPage = () => {
       alignItems="center"
     >
       <Box padding={2}>
-        <img src={logoUrl} alt="logoUrl" width={108}></img>
+        <img
+          src={logoUrl}
+          alt="logoUrl"
+          width={108}
+          className="logo-imdb-loginPage"
+          onClick={navToHome}
+        ></img>
       </Box>
 
       <Box

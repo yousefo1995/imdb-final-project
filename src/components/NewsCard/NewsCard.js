@@ -20,6 +20,7 @@ const NewsCard = ({
             variant="body1"
             overflow="hidden"
             textOverflow="ellipsis"
+            height="74px"
           >
             {title}
           </Typography>

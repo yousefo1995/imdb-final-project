@@ -1,0 +1,11 @@
+.gradiant {
+  background-image: linear-gradient(
+    to bottom,
+    #212121 30%,
+    #1a1919 50%,
+    #212121 70%
+  );
+
+  /* background-color: #212121; */
+  padding-bottom: 64px;
+}
