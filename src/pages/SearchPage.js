@@ -5,40 +5,49 @@ import SidePanel from "../components/SearchPageComponents/SidePanel/SidePanel";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import ViewMoreSkeleton from "../components/SearchPageComponents/ViewMoreSkeleton/ViewMoreSkeleton";
 
 const SearchPage = () => {
   const [list, setList] = useState([]);
   const [resultsNum, setResultsNum] = useState(5);
+  const [isloding, setIsloding] = useState(true);
+  const [noMoreData, setNoMoreData] = useState(false);
   const { searchText } = useParams();
 
-  useEffect(() => {
-    const options = {
-      method: "GET",
-      url: "https://imdb8.p.rapidapi.com/title/v2/find",
-      params: {
-        title: searchText,
-        limit: `${resultsNum}`,
-        sortArg: "moviemeter,asc",
-      },
-      headers: {
-        "X-RapidAPI-Key": "c9a49e6e0emshe6287501bc0261cp1f8a3cjsn71d861239fec",
-        "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
-      },
-    };
-
-    const fetchData = async () => {
-      try {
-        const response = await axios.request(options);
-        const data = response.data.results;
-        setList(data);
-      } catch (error) {
-        console.error(error);
+  const options = {
+    method: "GET",
+    url: "https://imdb8.p.rapidapi.com/title/v2/find",
+    params: {
+      title: searchText,
+      limit: `${resultsNum}`,
+      sortArg: "moviemeter,asc",
+    },
+    headers: {
+      "X-RapidAPI-Key": "caf467bd50msh1a4a2e97771a573p18ed90jsnb2ab667232c2",
+      "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
+    },
+  };
+  const fetchData = async () => {
+    try {
+      const response = await axios.request(options);
+      const data = response.data.results;
+      setIsloding(true);
+      if (list.length === data.length) {
+        setNoMoreData(true);
       }
-    };
+      setList(data);
+    } catch (error) {
+      console.error(error);
+      setIsloding(true);
+      setNoMoreData(true);
+    }
+  };
+  useEffect(() => {
     fetchData();
   }, [resultsNum, searchText]);
 
   const handelViewMore = () => {
+    setIsloding(false);
     setResultsNum(resultsNum + 5);
   };
 
@@ -104,14 +113,23 @@ const SearchPage = () => {
               )}
 
               <Stack width="212px" alignContent="flex-start">
-                {list && (
-                  <Button color="info" variant="text" onClick={handelViewMore}>
-                    <Typography textTransform="none">
-                      More popular matches
-                    </Typography>
-                    <KeyboardArrowDownIcon />
-                  </Button>
-                )}
+                {list &&
+                  (isloding ? (
+                    !noMoreData && (
+                      <Button
+                        color="info"
+                        variant="text"
+                        onClick={handelViewMore}
+                      >
+                        <Typography textTransform="none">
+                          More popular matches
+                        </Typography>
+                        <KeyboardArrowDownIcon />
+                      </Button>
+                    )
+                  ) : (
+                    <ViewMoreSkeleton />
+                  ))}
               </Stack>
             </Stack>
           </Stack>

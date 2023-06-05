@@ -6,28 +6,23 @@ const SidePanel = ({ searchText }) => {
   const [list, setList] = useState([]);
   const [listAdv, setListAdv] = useState([]);
 
+  const fetchData = async (url, setState) => {
+    try {
+      const res = await axios.get(url);
+      setState(res.data);
+    } catch (error) {}
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(
-          "https://run.mocky.io/v3/41870d6a-bc1f-41f3-a851-67ec27058c03"
-        );
-        setList(res.data);
-      } catch (error) {}
-    };
-    fetchData();
+    const url = "https://run.mocky.io/v3/41870d6a-bc1f-41f3-a851-67ec27058c03";
+    fetchData(url, setList);
   }, []);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(
-          "https://run.mocky.io/v3/b5ff322d-dabb-409e-9318-0e44742f18fb"
-        );
-        setListAdv(res.data);
-      } catch (error) {}
-    };
-    fetchData();
+    const url = "https://run.mocky.io/v3/b5ff322d-dabb-409e-9318-0e44742f18fb";
+
+    fetchData(url, setListAdv);
   }, []);
+
   return (
     <Stack paddingX={2}>
       <Typography
