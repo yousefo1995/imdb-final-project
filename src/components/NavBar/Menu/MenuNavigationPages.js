@@ -22,7 +22,7 @@ const MenuNavigationPages = () => {
       </ListItem>
       <Divider />
 
-      <ListItem button onClick={() => navigate("/tops")}>
+      <ListItem button onClick={() => navigate("/movie-list/top_rated")}>
         <LocalMoviesRoundedIcon color="info" />
         <Typography
           color="info.main"
@@ -42,9 +42,9 @@ const MenuNavigationPages = () => {
           marginLeft={1}
           variant={{ xs: "body1", lg: "h2" }}
           fontWeight={{ xs: "500", lg: "700" }}
-          onClick={() => navigate("/fan-favorite")}
+          onClick={() => navigate("/movie-list/popular")}
         >
-          Fan Favourite{" "}
+          Fan Favourite
         </Typography>
       </ListItem>
       <Divider />

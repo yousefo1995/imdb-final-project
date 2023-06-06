@@ -10,7 +10,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import NotFoundPage from "./pages/NotFoundPage";
 
 import NavAndFooterLayout from "./NavAndFooterLayout";
-// navbar and footer just in homePage , search  , wishlist , moviedetails
+import MovieList from "./pages/MovieList";
 
 const Router = () => {
   return (
@@ -55,6 +55,15 @@ const Router = () => {
             }
           />
         </Route>
+        <Route
+          path="movie-list/:urlPath"
+          element={
+            <NavAndFooterLayout>
+              <MovieList />
+            </NavAndFooterLayout>
+          }
+        />
+
         <Route
           path="*"
           element={
