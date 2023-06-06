@@ -8,8 +8,8 @@ export const avatarStyle = {
   },
   height: {
     xs: "142px",
-    sm: "auto",
-    md: "auto",
+    sm: "26vw",
+    md: "15vw",
     lg: "152px",
     xl: "186px",
   },
