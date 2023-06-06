@@ -8,6 +8,7 @@ import {
   Typography,
   Stack,
   Divider,
+  Avatar,
 } from "@mui/material";
 import { useNavigate } from "react-router";
 import { useContext } from "react";
@@ -15,7 +16,8 @@ import { AuthContext } from "../../../AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../Firebase";
 import MenuNavigationPages from "./MenuNavigationPages";
-
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
 const Menu = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
@@ -51,13 +53,15 @@ const Menu = () => {
           <Stack display={{ md: "block", lg: "none" }}>
             {currentUser ? (
               <ListItem>
-                <Typography variant="body1" color="secondary">
+                <Avatar sx={{ width: 24, height: 24 }} />
+                <Typography marginLeft={1} variant="body1" color="secondary">
                   {currentUser && splitUserName(currentUser.email)}
                 </Typography>
               </ListItem>
             ) : (
               <ListItem button onClick={() => navigate("/login")}>
-                <Typography variant="body1" color="secondary">
+                <LoginRoundedIcon color="secondary" />
+                <Typography marginLeft={1} variant="body1" color="secondary">
                   Sign In
                 </Typography>
               </ListItem>
@@ -70,7 +74,8 @@ const Menu = () => {
           </Stack>
           {currentUser && (
             <ListItem button onClick={handelLogOut}>
-              <Typography color="secondary" variant="body1">
+              <LogoutRoundedIcon sx={{ color: "#fff" }} />
+              <Typography color="#fff" variant="body1">
                 LogOut
               </Typography>
             </ListItem>
