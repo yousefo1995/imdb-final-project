@@ -5,10 +5,11 @@ import Title from "../../Core/Title/Title";
 import Subtitle from "../../Core/Subtitle/Subtitle";
 import MovieCard from "../../MovieCard/MovieCard/MovieCard";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const TopPicksSec = () => {
   const [list, setList] = useState([]);
-
+  const navigate = useNavigate();
   const options = {
     method: "GET",
     url: "https://api.themoviedb.org/3/movie/popular",
@@ -33,7 +34,9 @@ const TopPicksSec = () => {
   return (
     <Stack marginTop={6} maxWidth="100%">
       <Title marginBottom={2.5}>What to watch</Title>
-      <Subtitle>Top picks</Subtitle>
+      <Subtitle onClick={() => navigate("movie-list/top_rated")}>
+        Top picks
+      </Subtitle>
       <Typography marginTop={1} color="#B3B3B3">
         TV shows and movies just for you
       </Typography>
