@@ -28,7 +28,6 @@ const SortBySelect = ({ handleSortChange, setAscending }) => {
         className="sortSelector"
       >
         <option value="">List Order</option>
-        {/* <option value="Alpha">Alpha..</option> */}
         <option value="release-date">Release Date</option>
         <option value="rating">IMDB Rating</option>
       </select>

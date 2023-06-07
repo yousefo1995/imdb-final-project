@@ -80,10 +80,10 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
           </Grid>
           <Grid item container md={12} lg={2.25} spacing={0.5}>
             <Grid item xs={6} lg={12}>
-              <IconCard icon="videos">3 videos</IconCard>
+              <IconCard icon="videos">videos</IconCard>
             </Grid>
             <Grid item xs={6} lg={12}>
-              <IconCard icon="photos">22 photos</IconCard>
+              <IconCard icon="photos">photos</IconCard>
             </Grid>
           </Grid>
           <Grid item container xs={12}>
