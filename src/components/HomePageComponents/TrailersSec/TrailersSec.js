@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Stack, Skeleton } from "@mui/material";
+import { Stack } from "@mui/material";
 import Subtitle from "../../Core/Subtitle/Subtitle";
 import Title from "../../Core/Title/Title";
 import TrailerCard from "../../TrailerCard/TrailerCard";
 import TrailerCardSkeleton from "../../TrailerCard/TrailerCardSkeleton";
+import { useNavigate } from "react-router";
 import axios from "axios";
 const TrailersSec = () => {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const options = {
     method: "GET",
     url: "https://api.themoviedb.org/3/movie/upcoming",
@@ -59,7 +61,12 @@ const TrailersSec = () => {
           );
         })
       )}
-      <Subtitle showStartIcon={false} marginTop={2} minWidth="100%">
+      <Subtitle
+        showStartIcon={false}
+        marginTop={2}
+        minWidth="100%"
+        onClick={() => navigate("movie-list/upcoming")}
+      >
         Browse trailers
       </Subtitle>
     </Stack>
