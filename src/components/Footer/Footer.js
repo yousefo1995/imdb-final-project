@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography } from "@mui/material";
-
+import { Box } from "@mui/material";
 import FooterLinks from "./FooterLinks/FooterLinks";
 import SocialiconButton from "./SocialiconButton/SocialiconButton";
 import ImdbButton from "../Core/ImdbButton/ImdbButton";
 import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthContext";
 import { useNavigate } from "react-router";
+
 const Footer = () => {
   const [list, setList] = useState([]);
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
 
   const navToLogin = () => {
     navigate("/login");
@@ -33,6 +36,7 @@ const Footer = () => {
       flexDirection="column"
       alignItems="center"
       paddingBottom={6}
+      borderTop="1px solid #909090"
     >
       <Box
         display="flex"
@@ -40,11 +44,13 @@ const Footer = () => {
         alignItems="center"
         width="80%"
       >
-        <Box marginTop={2}>
-          <ImdbButton width="220px" onClick={navToLogin}>
-            Sign in for more access
-          </ImdbButton>
-        </Box>
+        {!currentUser && (
+          <Box marginTop={2}>
+            <ImdbButton width="220px" onClick={navToLogin}>
+              Sign in for more access
+            </ImdbButton>
+          </Box>
+        )}
         <Box marginY={2}>
           <SocialiconButton />
         </Box>
