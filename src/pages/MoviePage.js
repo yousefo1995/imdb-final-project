@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import IconCard from "../components/MovieDetailsPageComponents/IconCard/IconCard";
-import { Container, Grid, Typography, Box, Stack } from "@mui/material";
+import { Grid, Typography, Box, Stack } from "@mui/material";
 import GridMoviePoster from "../components/MovieDetailsPageComponents/GridMoviePoster/GridMoviePoster";
 import ImdbChip from "../components/Core/ImdbChip/ImdbChip";
 import MovieRating from "../components/MovieDetailsPageComponents/MovieRating/MovieRating";
@@ -11,30 +11,73 @@ import StyledCardButton from "../components/MovieCard/StyledCardButton/StyledCar
 import "./style/style.css";
 import AddIcon from "@mui/icons-material/Add";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import axios from "axios";
+import { useParams } from "react-router";
+
 const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
+  const { movieId } = useParams();
+  const [data, setData] = useState([]);
+
+  const options = {
+    method: "GET",
+    url: `https://api.themoviedb.org/3/movie/${movieId}`,
+    params: { language: "en-US" },
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYzdiN2RmZTA2NGQ2MzZhOWRlNWIxYmUzYWVjZjc0OCIsInN1YiI6IjY0NjBiNWY4YTY3MjU0MDBlM2QxYzhkMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FEW-f0nD7r9Pt2Y0z5zNp6haKVhqashRIv0aL6aU6LM",
+    },
+  };
+  useEffect(() => {
+    axios
+      .request(options)
+      .then(function (response) {
+        setData(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }, []);
+
   return (
-    <Box className="gradiant">
-      {/*  // xl ? md ? none */}
-      <Container>
-        <MoviePageHeadInfo />
-        <Grid container spacing={0.5}>
-          <Grid item display={{ xs: "none", md: "block" }} lg={3} md={3}>
-            <GridMoviePoster showPlayTrailerBtn={false} />
+    <Stack className="gradiant" alignItems="center">
+      <Stack
+        paddingLeft={{ xxl: "5.5%", xl: "3.5%", md: "1%" }}
+        paddingRight={{ xxl: "5.5%", xl: "3.5%", md: "1%" }}
+        width={{ xs: "100%", md: "100%", lg: "992px", xl: "1232px" }}
+        alignItems="center"
+        paddingTop={2}
+      >
+        <MoviePageHeadInfo
+          duration={data.runtime}
+          MovieName={data.title}
+          releaseDate={data.release_date}
+          language={data.original_language}
+          rate={data.vote_average}
+          numberOfRates={data.vote_count}
+          popularity={data.popularity}
+        />
+        <Grid container spacing={1}>
+          <Grid item display={{ xs: "none", md: "block" }} lg={2.7} md={3.3}>
+            <GridMoviePoster
+              showPlayTrailerBtn={false}
+              imagePath={data.poster_path}
+            />
           </Grid>
-          <Grid item xs={12} md={9} lg={7}>
-            <Box bgcolor="blue">
+          <Grid item xs={12} md={8.55} lg={7}>
+            <Box>
               <GridMoviePoster
-                image="https://picsum.photos/200"
+                imagePath={data.backdrop_path}
                 showWishlistBtn={false}
               />
             </Box>
           </Grid>
-          <Grid item container md={12} lg={2} spacing={0.5}>
+          <Grid item container md={12} lg={2.25} spacing={0.5}>
             <Grid item xs={6} lg={12}>
-              <IconCard icon="videos">13 videos</IconCard>
+              <IconCard icon="videos">3 videos</IconCard>
             </Grid>
             <Grid item xs={6} lg={12}>
-              <IconCard icon="photos">13 photos</IconCard>
+              <IconCard icon="photos">22 photos</IconCard>
             </Grid>
           </Grid>
           <Grid item container xs={12}>
@@ -45,15 +88,15 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
               display={{ xs: "block", md: "none" }}
               xs={3}
             >
-              <GridMoviePoster showPlayTrailerBtn={false} />
+              <GridMoviePoster
+                imagePath={data.poster_path}
+                showPlayTrailerBtn={false}
+              />
             </Grid>
             <Grid item xs={8.5} md={12} lg={8}>
               <Box flexWrap="wrap">
-                {/* category component */}
-                <ImdbChip>Drama</ImdbChip>
-                <ImdbChip>Drama</ImdbChip>
-                <ImdbChip>Drama</ImdbChip>
-                <ImdbChip>Drama</ImdbChip>
+                {data.genres &&
+                  data.genres.map((item) => <ImdbChip>{item.name}</ImdbChip>)}
               </Box>
               <Typography
                 color="#fff"
@@ -61,10 +104,9 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
                 fontWeight="500"
                 maxHeight="120px"
                 marginTop={1}
+                overflow="hidden"
               >
-                After her husband leaves her, young mother of two Miriam "Midge"
-                Maisel discovers that she has a talent for stand-up comedy.
-                Could this be her calling?
+                {data.overview}
               </Typography>
             </Grid>
             <Grid
@@ -73,15 +115,25 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
               xs={12}
               marginTop={2}
             >
-              <MovieRating />
+              <MovieRating
+                rate={data.vote_average}
+                numberOfRates={data.vote_count}
+                popularity={data.popularity}
+              />
             </Grid>
             <Grid item container justifyContent={{ lg: "space-between" }}>
               <Grid item xs={8.5} md={12} lg={8}>
-                <ImdbAccordion stars={stars} creator={creator} />
+                <ImdbAccordion
+                  stars={data.production_countries}
+                  creator={data.production_companies}
+                />
               </Grid>
               <Grid item md={8} display={{ xs: "none", md: "block" }}>
                 <Box marginTop={2} display={{ xs: "none", lg: "block" }}>
-                  <AccordionData stars={stars} creator={creator} />
+                  <AccordionData
+                    stars={data.production_countries}
+                    creator={data.production_companies}
+                  />
                 </Box>
               </Grid>
               <Grid item xs={12} lg={3.75}>
@@ -113,7 +165,7 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
                     fontWeight="700"
                     color="info.main"
                   >
-                    0.0k
+                    {data.vote_count}
                   </Typography>
                   <Typography marginLeft={1} fontSize="14px" color="info.main">
                     User reviews
@@ -123,8 +175,8 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
             </Grid>
           </Grid>
         </Grid>
-      </Container>
-    </Box>
+      </Stack>
+    </Stack>
   );
 };
 

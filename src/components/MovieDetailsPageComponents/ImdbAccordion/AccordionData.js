@@ -10,11 +10,16 @@ const AccordionData = ({ creator, stars }) => {
         paddingTop="16px"
         paddingBottom="16px"
         flexDirection="row"
+        overflow="hidden"
+        whiteSpace="nowrap"
       >
         <Typography color="#FFF">Creator</Typography>
-        <Typography color="info.main" marginLeft={2}>
-          {creator}
-        </Typography>
+        {creator &&
+          creator.map((item) => (
+            <Typography color="info.main" marginLeft={2}>
+              {item.name}
+            </Typography>
+          ))}
       </Stack>
       <Divider sx={{ bgcolor: "#7B7B7B" }} />
       <Stack
@@ -23,10 +28,14 @@ const AccordionData = ({ creator, stars }) => {
         paddingBottom="16px"
         flexDirection="row"
       >
-        <Typography color="#FFF">Stars</Typography>
-        <Typography color="info.main" marginLeft={2}>
-          {stars}
-        </Typography>
+        <Typography color="#FFF">Production countries</Typography>
+
+        {stars &&
+          stars.map((item) => (
+            <Typography color="info.main" marginLeft={2}>
+              {item.name}
+            </Typography>
+          ))}
       </Stack>
       <Divider sx={{ bgcolor: "#7B7B7B" }} />
     </Typography>

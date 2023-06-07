@@ -1,16 +1,18 @@
 import React from "react";
-import StyledCardButton from "../../MovieCard/StyledCardButton/StyledCardButton";
-import { Stack, Typography, Box } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import MovingSharpIcon from "@mui/icons-material/MovingSharp";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import MovieRatingComponent from "./MovieRatingComponent";
-
+import { toIntegar, toKValue } from "../../../functions/numberFunctions";
 const MovieRating = ({
   rate = "0.0",
   numberOfRates = "00k",
   popularity = "00",
 }) => {
+  const populartyKvalue = toKValue(popularity);
+  const intRate = toIntegar(rate);
+  const numberOfRatesKvalue = toKValue(numberOfRates);
   return (
     <Stack flexDirection="row">
       {/* IMDB Rate */}
@@ -23,7 +25,7 @@ const MovieRating = ({
             display="flex"
             alignItems="center"
           >
-            {rate}{" "}
+            {intRate}{" "}
             <Typography fontSize="16px" color="Rgba(255,255,255,0.7)">
               /10
             </Typography>
@@ -33,7 +35,7 @@ const MovieRating = ({
             fontSize="12px"
             marginLeft={{ xs: "4px" }}
           >
-            {numberOfRates}
+            {numberOfRatesKvalue}
           </Typography>
         </Stack>
       </MovieRatingComponent>
@@ -50,7 +52,7 @@ const MovieRating = ({
       <MovieRatingComponent label="POPULARITY">
         <MovingSharpIcon color="secondary" fontSize="large" />
         <Typography color="#fff" fontSize="20px">
-          {popularity}
+          {populartyKvalue}
         </Typography>
       </MovieRatingComponent>
     </Stack>
