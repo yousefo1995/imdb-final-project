@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, Button } from "@mui/material";
 import Subtitle from "../../Core/Subtitle/Subtitle";
 import ImdbButton from "../../Core/ImdbButton/ImdbButton";
 import { useNavigate } from "react-router";
@@ -10,7 +10,9 @@ const FromYourWishlistForNotLogin = () => {
     <Stack paddingTop={2.5} marginTop={3} width="100%">
       <Subtitle minWidth="100%">From your Watchlist</Subtitle>
       <Stack alignItems="center" width="100%" marginTop={4} marginBottom={4}>
-        <WishBtnCards position="relative" bgColor="rgb(90, 90, 90, 1)" />
+        <Button variant="text" disabled>
+          <WishBtnCards position="relative" bgColor="rgb(90, 90, 90, 1)" />
+        </Button>
         <Typography variant="body1" color="#fff">
           Sign in to access your Watchlist
         </Typography>

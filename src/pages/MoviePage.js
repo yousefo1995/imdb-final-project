@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import IconCard from "../components/MovieDetailsPageComponents/IconCard/IconCard";
 import { Grid, Typography, Box, Stack } from "@mui/material";
 import GridMoviePoster from "../components/MovieDetailsPageComponents/GridMoviePoster/GridMoviePoster";
@@ -13,11 +13,15 @@ import AddIcon from "@mui/icons-material/Add";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import axios from "axios";
 import { useParams } from "react-router";
-
+import { WatchListContext } from "../WatchListContext";
 const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
   const { movieId } = useParams();
   const [data, setData] = useState([]);
+  const { addToWatchList } = useContext(WatchListContext);
 
+  const watchListHandler = (movieData) => {
+    addToWatchList(movieData);
+  };
   const options = {
     method: "GET",
     url: `https://api.themoviedb.org/3/movie/${movieId}`,
@@ -62,6 +66,8 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
             <GridMoviePoster
               showPlayTrailerBtn={false}
               imagePath={data.poster_path}
+              watchListHandler={watchListHandler}
+              data={data}
             />
           </Grid>
           <Grid item xs={12} md={8.55} lg={7}>
@@ -74,10 +80,10 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
           </Grid>
           <Grid item container md={12} lg={2.25} spacing={0.5}>
             <Grid item xs={6} lg={12}>
-              <IconCard icon="videos">3 videos</IconCard>
+              <IconCard icon="videos">videos</IconCard>
             </Grid>
             <Grid item xs={6} lg={12}>
-              <IconCard icon="photos">22 photos</IconCard>
+              <IconCard icon="photos">photos</IconCard>
             </Grid>
           </Grid>
           <Grid item container xs={12}>
@@ -144,6 +150,7 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
                       bg="#3A3A3A"
                       width="244px"
                       color="#fff"
+                      onClick={() => watchListHandler(data)}
                     >
                       <AddIcon fontSize="small" />
                       Add to WatchList

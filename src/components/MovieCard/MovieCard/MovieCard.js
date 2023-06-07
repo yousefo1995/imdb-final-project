@@ -13,7 +13,8 @@ import { StyledCard } from "./style";
 import WishBtnCards from "../WishlistBtn/wishBtnCards";
 import { useNavigate } from "react-router";
 import { WatchListContext } from "../../../WatchListContext";
-
+import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
+import { Stack } from "@mui/system";
 const MovieCard = ({
   title = "title",
   rate = "0.0",
@@ -21,6 +22,7 @@ const MovieCard = ({
   showFullCard = true,
   movieId,
   movieData,
+  inWatchList = false,
 }) => {
   const navigate = useNavigate();
   const { addToWatchList } = useContext(WatchListContext);
@@ -78,7 +80,13 @@ const MovieCard = ({
             </Link>
           </CardContent>
         )}
-        <WishBtnCards onClick={watchListHandler} />
+        {!inWatchList ? (
+          <WishBtnCards onClick={watchListHandler} />
+        ) : (
+          <Stack position="absolute" top="0" left="0" color="secondary.main">
+            <BookmarkAddedIcon fontSize="large" />
+          </Stack>
+        )}
       </CardActionArea>
 
       {showFullCard && (

@@ -4,9 +4,11 @@ import SimpleSlider from "../../SimpleSlider/SimpleSlider";
 import Subtitle from "../../Core/Subtitle/Subtitle";
 import MovieCard from "../../MovieCard/MovieCard/MovieCard";
 import axios from "axios";
-
+import { useNavigate } from "react-router";
 const FanFavorites = () => {
   const [list, setList] = useState([]);
+  const navigate = useNavigate();
+
   const options = {
     method: "GET",
     url: "https://api.themoviedb.org/3/movie/top_rated",
@@ -30,7 +32,9 @@ const FanFavorites = () => {
 
   return (
     <Stack paddingTop={2.5} marginTop={3} maxWidth="100%">
-      <Subtitle minWidth="100%">Fan favorites</Subtitle>
+      <Subtitle minWidth="100%" onClick={() => navigate("movie-list/popular")}>
+        Fan favorites
+      </Subtitle>
       <Typography marginTop={1} color="#B3B3B3">
         This week's top TV and movies{" "}
       </Typography>

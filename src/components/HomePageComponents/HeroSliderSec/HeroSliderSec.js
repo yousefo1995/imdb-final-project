@@ -44,7 +44,7 @@ const HeroSliderSec = () => {
           slidesScrollOnLg={1}
           slidesScrollOnXl={1}
           ButtonsDisplay={{ xs: "none", md: "block" }}
-          buttonHeight={{ sm: "45%", md: "50%", lg: "55%", xl: "65%" }}
+          buttonHeight={{ sm: "45%", md: "50%", lg: "55%", xl: "55%" }}
         >
           {list.map((item) => {
             const posterPath = item.poster_path;
