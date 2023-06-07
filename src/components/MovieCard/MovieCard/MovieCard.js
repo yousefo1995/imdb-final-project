@@ -1,14 +1,18 @@
 import React, { useContext } from "react";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { CardActionArea, CardActions } from "@mui/material";
+import {
+  CardActionArea,
+  CardActions,
+  Box,
+  Link,
+  Typography,
+  CardMedia,
+  CardContent,
+} from "@mui/material";
 import StyledCardButton from "../StyledCardButton/StyledCardButton";
 import AddIcon from "@mui/icons-material/Add";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import { Box, Link } from "@mui/material";
 import { StyledCard } from "./style";
 import WishBtnCards from "../WishlistBtn/wishBtnCards";
 import { useNavigate } from "react-router";
@@ -34,6 +38,7 @@ const MovieCard = ({
   const cardHandler = () => {
     navigate(`/movie/${movieId}`);
   };
+
   return (
     <StyledCard showFullCard={showFullCard}>
       <CardActionArea disableRipple onClick={cardHandler}>
