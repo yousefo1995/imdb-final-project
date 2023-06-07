@@ -5,21 +5,25 @@ import { Stack, Box, Typography, Chip } from "@mui/material";
 import Subtitle from "../../Core/Subtitle/Subtitle";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import TopNewsSkeleton from "./TopNewsSkeleton";
 
 const TopNewsSection = () => {
   const [list, setList] = useState([]);
   const [newsList, setNewsList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async (url, setList) => {
     try {
       const res = await axios.get(url);
       setList(res.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
+    setLoading(true);
     const url = "https://mocki.io/v1/780394a9-d743-4441-9849-6c08596f7905";
     fetchData(url, setNewsList);
   }, []);
@@ -34,29 +38,33 @@ const TopNewsSection = () => {
     <Stack marginTop={4} marginBottom={6} maxWidth="100%">
       <Subtitle>Top News</Subtitle>
       <Box display="flex" flexDirection="column" width="100%" marginTop={2}>
-        <SimpleSlider
-          slidesToShow={2.9}
-          slidesScroll={3}
-          slidesOnSm={1.15}
-          slidesScrollOnSm={1}
-          slidesOnMd={1.25}
-          slidesScrollOnMd={2}
-          slidesOnLg={2.15}
-          slidesScrollOnLg={2}
-          slidesOnXl={2.7}
-          slidesScrollOnXl={3}
-          infinite={true}
-          buttonHeight="30%"
-        >
-          {newsList.map((item) => (
-            <NewsCard
-              title={item.title}
-              source={item.source}
-              image={item.image}
-              date={item.date}
-            />
-          ))}
-        </SimpleSlider>
+        {loading ? (
+          <TopNewsSkeleton />
+        ) : (
+          <SimpleSlider
+            slidesToShow={2.9}
+            slidesScroll={3}
+            slidesOnSm={1.15}
+            slidesScrollOnSm={1}
+            slidesOnMd={1.25}
+            slidesScrollOnMd={2}
+            slidesOnLg={2.15}
+            slidesScrollOnLg={2}
+            slidesOnXl={2.7}
+            slidesScrollOnXl={3}
+            infinite={true}
+            buttonHeight="30%"
+          >
+            {newsList.map((item) => (
+              <NewsCard
+                title={item.title}
+                source={item.source}
+                image={item.image}
+                date={item.date}
+              />
+            ))}
+          </SimpleSlider>
+        )}
       </Box>
       <Stack flexDirection="row" marginTop={2}>
         {list.map((item) => (
