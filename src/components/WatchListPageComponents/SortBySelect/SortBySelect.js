@@ -12,7 +12,7 @@ const SortBySelect = ({ handleSortChange, setAscending }) => {
     handleSortChange(value);
   };
   return (
-    <Stack flexDirection="row">
+    <Stack flexDirection={{ xs: "column", sm: "row" }}>
       <Typography
         marginRight={0.5}
         fontSize="13px"

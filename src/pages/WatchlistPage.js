@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Divider, IconButton, Stack, Typography } from "@mui/material";
 import WatchListCard from "../components/WatchListPageComponents/WatchListCard/WatchListCard";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
@@ -118,7 +118,7 @@ const WatchListPage = () => {
             </Stack>
             <Divider orientation="horizontal" flexItem sx={dividerStyles} />
             <Stack
-              flexDirection="row"
+              flexDirection={{ xs: "column", sm: "row" }}
               color="#5A5A5A"
               justifyContent="space-between"
               alignItems="center"
@@ -156,8 +156,11 @@ const WatchListPage = () => {
             >
               {sortedWatchList.map((movie) => (
                 <Stack
-                  flexDirection={showGrid ? "column" : "row"}
+                  flexDirection={
+                    showGrid ? "column" : { xs: "column", sm: "row" }
+                  }
                   alignItems="center"
+                  justifyContent="space-between"
                 >
                   <WatchListCard
                     movieId={movie.id}
@@ -172,6 +175,7 @@ const WatchListPage = () => {
                   />
                   <Stack display={editToggle || "none"}>
                     <Button
+                      size="small"
                       variant="outlined"
                       onClick={() => handleDeleteItem(movie.id)}
                     >
