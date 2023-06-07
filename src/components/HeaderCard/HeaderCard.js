@@ -26,7 +26,9 @@ const HeaderCard = ({
           image={backdropImage}
           className="card-image"
           alt="movie poster"
-          sx={{ maxHeight: { xs: "35vH", sm: "40vH", md: "65vH" } }}
+          sx={{
+            maxHeight: { xs: "35vH", sm: "40vH", md: "60vH", lg: "100vh" },
+          }}
         />
       </CardActionArea>
 
