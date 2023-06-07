@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Stack } from "@mui/material";
+import { Skeleton, Stack } from "@mui/material";
 import SimpleSlider from "../../SimpleSlider/SimpleSlider";
 import HeaderCard from "../../HeaderCard/HeaderCard";
 import axios from "axios";
 
 const HeroSliderSec = () => {
   const [list, setList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const options = {
     method: "GET",
@@ -18,10 +19,12 @@ const HeroSliderSec = () => {
     },
   };
   useEffect(() => {
+    setIsLoading(true);
     axios
       .request(options)
       .then(function (response) {
         setList(response.data.results);
+        setIsLoading(false);
       })
       .catch(function (error) {
         console.error(error);
@@ -46,23 +49,32 @@ const HeroSliderSec = () => {
           ButtonsDisplay={{ xs: "none", md: "block" }}
           buttonHeight={{ sm: "45%", md: "50%", lg: "55%", xl: "55%" }}
         >
-          {list.map((item) => {
-            const posterPath = item.poster_path;
-            const posterUrl = `https://image.tmdb.org/t/p/w500${posterPath}`;
-            const backdropPath = item.poster_path;
-            const backdropUrl = `https://image.tmdb.org/t/p/w500${backdropPath}`;
-            return (
-              <Stack key={item.id}>
-                <HeaderCard
-                  title={item.title}
-                  backdropImage={backdropUrl}
-                  posterImage={posterUrl}
-                  movieId={item.id}
-                  movieData={item}
-                />
-              </Stack>
-            );
-          })}
+          {isLoading ? (
+            <Skeleton
+              variant="rectangular"
+              width="100%"
+              height={400}
+              sx={{ bgcolor: "#3A3A3A" }}
+            />
+          ) : (
+            list.map((item) => {
+              const posterPath = item.poster_path;
+              const posterUrl = `https://image.tmdb.org/t/p/w500${posterPath}`;
+              const backdropPath = item.poster_path;
+              const backdropUrl = `https://image.tmdb.org/t/p/w500${backdropPath}`;
+              return (
+                <Stack key={item.id}>
+                  <HeaderCard
+                    title={item.title}
+                    backdropImage={backdropUrl}
+                    posterImage={posterUrl}
+                    movieId={item.id}
+                    movieData={item}
+                  />
+                </Stack>
+              );
+            })
+          )}
         </SimpleSlider>
       </Stack>
     </Stack>

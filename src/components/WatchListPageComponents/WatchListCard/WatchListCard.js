@@ -14,6 +14,7 @@ import {
 } from "../../../functions/stringFunctions";
 import { toIntegar, toKValue } from "../../../functions/numberFunctions";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const WatchListCard = ({
   showGrid = false, //list or grid
@@ -48,17 +49,19 @@ const WatchListCard = ({
           />
         </Stack>
         <StyledCardContent showGrid={showGrid}>
-          <Typography
-            fontSize="17px"
-            color="#136CB2"
-            fontWeight="400"
-            overflow="hidden"
-            textOverflow="ellipsis"
-            whiteSpace="nowrap"
-            maxWidth={!showGrid || "124px"}
-          >
-            {movieTitle}
-          </Typography>{" "}
+          <Link to={`/movie/${movieId}`}>
+            <Typography
+              fontSize="17px"
+              color="#136CB2"
+              fontWeight="400"
+              overflow="hidden"
+              textOverflow="ellipsis"
+              whiteSpace="nowrap"
+              maxWidth={!showGrid || "124px"}
+            >
+              {movieTitle}
+            </Typography>{" "}
+          </Link>
           {!showGrid && (
             <Stack flexDirection="row">
               <Typography fontSize="12px" fontWeight="400" color="#666666">
@@ -100,7 +103,6 @@ const WatchListCard = ({
           {!showGrid && (
             <Stack>
               <Stack flexDirection="row">
-                {/* use map */}
                 <Typography fontSize="11px" fontWeight="400" color="#136CB2">
                   {topActors}
                 </Typography>

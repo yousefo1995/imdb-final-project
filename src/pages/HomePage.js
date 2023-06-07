@@ -7,11 +7,14 @@ import FromYourWishlistSec from "../components/HomePageComponents/FromYourWishli
 import TopPicksSec from "../components/HomePageComponents/TopPicksSec/TopPicksSec";
 import HeroSliderSec from "../components/HomePageComponents/HeroSliderSec/HeroSliderSec";
 import TrailersSec from "../components/HomePageComponents/TrailersSec/TrailersSec";
-import FromYourWishlistForNotLogin from "../components/HomePageComponents/FromYourWishlistSec/FromYourWishlistForNotLogin";
+import FromYourWishlistEmptyList from "../components/HomePageComponents/FromYourWishlistSec/FromYourWishlistEmptyList";
 import { AuthContext } from "../AuthContext";
 import { useContext } from "react";
+import { WatchListContext } from "../WatchListContext";
+
 const HomePage = () => {
   const { currentUser } = useContext(AuthContext);
+  const { watchList } = useContext(WatchListContext);
 
   return (
     <Stack bgcolor="#000" alignItems="center">
@@ -29,9 +32,13 @@ const HomePage = () => {
         </Stack>
         <TopPicksSec />
         {currentUser ? (
-          <FromYourWishlistSec />
+          watchList.length === 0 ? (
+            <FromYourWishlistEmptyList isLogged={true} />
+          ) : (
+            <FromYourWishlistSec />
+          )
         ) : (
-          <FromYourWishlistForNotLogin />
+          <FromYourWishlistEmptyList />
         )}
 
         <FanFavorites />

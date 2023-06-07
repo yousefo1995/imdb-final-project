@@ -9,6 +9,8 @@ const MovieList = () => {
     pageTitle = "Top Rated movies";
   } else if (urlPath === "popular") {
     pageTitle = "Fan Favourite movies";
+  } else if (urlPath === "upcoming") {
+    pageTitle = "Trailers";
   }
   return (
     <div>

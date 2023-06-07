@@ -82,7 +82,7 @@ const NavBar = () => {
                     color="#fff"
                   />
                   Watchlist{" "}
-                  {currentUser && (
+                  {currentUser && watchList.length !== 0 && (
                     <Typography
                       border="solid"
                       borderRadius="40px"
