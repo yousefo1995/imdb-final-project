@@ -10,7 +10,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../../Firebase";
 import { useNavigate } from "react-router-dom";
 
-const UserMenu = ({ userName = "yousefo123" }) => {
+const UserMenu = ({ userName = "" }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const { currentUser } = useContext(AuthContext);
