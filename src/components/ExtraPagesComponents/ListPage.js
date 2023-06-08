@@ -36,7 +36,7 @@ const ListPage = ({ urlPath, pageTitle }) => {
   // wrong total pages in data xxxxxxxxxxxxx
   //   const totalPagesNumber = data.total_pages;
   //   const numberOfPages = Math.floor(totalPagesNumber / 2);
-  const numberOfPages = 500;
+  const numberOfPages = urlPath === "upcoming" ? 11 : 500;
   return (
     <Stack
       bgcolor="#000"
