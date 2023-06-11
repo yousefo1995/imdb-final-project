@@ -23,7 +23,7 @@ const SearchPage = () => {
       sortArg: "moviemeter,asc",
     },
     headers: {
-      "X-RapidAPI-Key": "caf467bd50msh1a4a2e97771a573p18ed90jsnb2ab667232c2",
+      "X-RapidAPI-Key": "6bcad2763fmshdc33b3ba871540bp1d0b82jsn59efa233f44b",
       "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
     },
   };
