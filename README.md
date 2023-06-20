@@ -1,3 +1,28 @@
+## Website Screenshots
+
+![image](https://github.com/yousefo1995/imdb-final-project/assets/123307132/0b5e3f10-807a-457c-8f88-1c22af502891)
+
+![image](https://github.com/yousefo1995/imdb-final-project/assets/123307132/9419d006-ca86-4631-9764-f08f8d37f69c)
+
+![image](https://github.com/yousefo1995/imdb-final-project/assets/123307132/b61c70c2-669a-4967-8704-414d05d4a9c1)
+
+![image](https://github.com/yousefo1995/imdb-final-project/assets/123307132/2735ebb2-cd6b-4fcf-996f-f3e85d086170)
+
+![image](https://github.com/yousefo1995/imdb-final-project/assets/123307132/8bd7e3b5-6393-416d-8d3a-a0e2832a1010)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
