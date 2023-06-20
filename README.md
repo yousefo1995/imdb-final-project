@@ -1,6 +1,5 @@
 ### 🚀 Deployment
-[![Deployment](http://13.51.160.106/)
-
+http://13.51.160.106/
 
 
 ## Website Screenshots
