@@ -12,7 +12,7 @@ import { WatchListContext } from "../WatchListContext";
 
 const WatchListPage = () => {
   const [showGrid, setShowGrid] = useState(false);
-  const { watchList, setWatchList, deleteFromWatchList } =
+  const { watchList, clearWatchList, deleteFromWatchList } =
     useContext(WatchListContext);
   const [sortBy, setSortBy] = useState("");
   const [ascendingToggle, setAscendingToggle] = useState(true);
@@ -43,14 +43,6 @@ const WatchListPage = () => {
   } else {
     ascendingToggle && sortedWatchList.reverse();
   }
-
-  const handleClear = () => {
-    setWatchList([]);
-    localStorage.setItem("watchList", JSON.stringify([]));
-  };
-  const handleDeleteItem = (movieId) => {
-    deleteFromWatchList(movieId);
-  };
 
   return (
     <Stack bgcolor="#B3B3B3" alignItems="center">
@@ -141,7 +133,11 @@ const WatchListPage = () => {
                 <IconButton onClick={handelGridCards}>
                   <AppsRoundedIcon />
                 </IconButton>
-                <Button variant="outlined" sx={clearBtn} onClick={handleClear}>
+                <Button
+                  variant="outlined"
+                  sx={clearBtn}
+                  onClick={clearWatchList}
+                >
                   Clear
                 </Button>
               </Stack>
@@ -177,7 +173,7 @@ const WatchListPage = () => {
                     <Button
                       size="small"
                       variant="outlined"
-                      onClick={() => handleDeleteItem(movie.id)}
+                      onClick={() => deleteFromWatchList(movie.firebaseId)}
                     >
                       delete
                     </Button>

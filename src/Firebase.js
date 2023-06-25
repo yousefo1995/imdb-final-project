@@ -1,16 +1,23 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
 const firebaseConfig = {
-  apiKey: "AIzaSyCKqbwk5jMch3AKINLDKVaIor34l4stLvg",
-  authDomain: "imdb-clone-62dac.firebaseapp.com",
-  projectId: "imdb-clone-62dac",
-  storageBucket: "imdb-clone-62dac.appspot.com",
-  messagingSenderId: "254427168131",
-  appId: "1:254427168131:web:d2e77e529106a073b30ab6",
-  measurementId: "G-P0J344WQY6",
+  apiKey: "AIzaSyAPC-VbKpIBZVXF043h5wBuCijPg3lIRKg",
+
+  authDomain: "imdb-clone-2.firebaseapp.com",
+
+  projectId: "imdb-clone-2",
+
+  storageBucket: "imdb-clone-2.appspot.com",
+
+  messagingSenderId: "792473352950",
+
+  appId: "1:792473352950:web:b7c315963c4c108a828ad7",
+
+  measurementId: "G-R29ZJ9006F",
 };
 
 // Initialize Firebase
@@ -18,3 +25,4 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and get a reference to the service
 export const auth = getAuth(app);
+export const db = getFirestore(app);

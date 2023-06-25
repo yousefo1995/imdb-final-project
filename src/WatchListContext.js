@@ -1,37 +1,69 @@
 import React, { useState, useEffect } from "react";
 import { createContext } from "react";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
+import { db } from "./Firebase";
 
 export const WatchListContext = createContext();
 const WatchListContextProvider = ({ children }) => {
-  const storedWatchList = localStorage.getItem("watchList");
-
-  const [watchList, setWatchList] = useState(
-    storedWatchList ? JSON.parse(storedWatchList) : []
-  );
-
+  const [watchList, setWatchList] = useState([]);
+  const getData = async () => {
+    const data = await getDocs(collection(db, "watchList"));
+    const filteredData = data.docs.map((doc) => ({
+      ...doc.data(),
+      firebaseId: doc.id,
+    }));
+    setWatchList(filteredData);
+  };
   useEffect(() => {
-    const storedWatchList = localStorage.getItem("watchList");
-    if (storedWatchList) {
-      setWatchList(JSON.parse(storedWatchList));
-    }
+    getData();
   }, []);
-  useEffect(() => {
-    localStorage.setItem("watchList", JSON.stringify(watchList));
-  }, [watchList]);
-  const addToWatchList = (movieData) => {
+
+  const addToWatchList = async (movieData) => {
     const isDuplicate = watchList.find((movie) => movie.id === movieData.id);
     if (!isDuplicate) {
-      setWatchList((prev) => [...prev, movieData]);
+      try {
+        const docRef = await addDoc(collection(db, "watchList"), movieData);
+        getData();
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
     }
   };
 
-  const deleteFromWatchList = (movieId) => {
-    setWatchList((prev) => prev.filter((movie) => movie.id !== movieId));
+  const deleteFromWatchList = async (firebaseId) => {
+    // setWatchList((prev) =>
+    //   prev.filter((movie) => movie.firebaseId !== firebaseId)
+    // );
+    const movieDoc = doc(db, "watchList", firebaseId);
+    await deleteDoc(movieDoc);
+    getData();
+  };
+
+  const clearWatchList = async () => {
+    const deletePromises = watchList.map(async (movie) => {
+      const movieDoc = doc(db, "watchList", movie.firebaseId);
+      await deleteDoc(movieDoc);
+    });
+    await Promise.all(deletePromises);
+
+    getData();
   };
 
   return (
     <WatchListContext.Provider
-      value={{ watchList, setWatchList, addToWatchList, deleteFromWatchList }}
+      value={{
+        watchList,
+        setWatchList,
+        addToWatchList,
+        deleteFromWatchList,
+        clearWatchList,
+      }}
     >
       {children}
     </WatchListContext.Provider>
