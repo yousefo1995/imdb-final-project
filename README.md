@@ -1,6 +1,5 @@
 ### 🚀 Deployment
-http://13.51.197.98
-
+http://16.171.35.58/
 ## Website Screenshots
 
 ![image](https://github.com/yousefo1995/imdb-final-project/assets/123307132/0b5e3f10-807a-457c-8f88-1c22af502891)
