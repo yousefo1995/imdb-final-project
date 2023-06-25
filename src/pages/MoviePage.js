@@ -54,7 +54,7 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
   }, []);
 
   const imageUrl = `https://image.tmdb.org/t/p/w500${data.poster_path}`;
-  const videoKey = videoData.length !== 0 ? videoData.results[0].key : null;
+  const videoKey = videoData.length !== 0 ? videoData.results[1].key : null; //change to 1
   const videoNum = videoData.length !== 0 ? videoData.results.length : null;
   const videoUrl = `https://www.youtube.com/embed/${videoKey}`;
   return (
