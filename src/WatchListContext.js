@@ -10,6 +10,7 @@ import {
 import { db } from "./Firebase";
 
 export const WatchListContext = createContext();
+//
 const WatchListContextProvider = ({ children }) => {
   const [watchList, setWatchList] = useState([]);
   const getData = async () => {
