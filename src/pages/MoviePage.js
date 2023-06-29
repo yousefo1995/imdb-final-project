@@ -54,7 +54,8 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
   }, []);
 
   const imageUrl = `https://image.tmdb.org/t/p/w500${data.poster_path}`;
-  const videoKey = videoData.length !== 0 ? videoData.results[0].key : null;
+  const posterUrl = `https://image.tmdb.org/t/p/w500${data.backdrop_path}`;
+  const videoKey = videoData.length !== 0 ? videoData.results[0].key : null; //change to 1
   const videoNum = videoData.length !== 0 ? videoData.results.length : null;
   const videoUrl = `https://www.youtube.com/embed/${videoKey}`;
   return (
@@ -94,7 +95,7 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
                   showWishlistBtn={false}
                   watchListHandler={watchListHandler}
                   data={data}
-                  image={imageUrl}
+                  image={posterUrl}
                   alt={data.title}
                   component="img"
                   responsiveHeight={{ md: "320px", lg: "334px", xl: "416px" }}
