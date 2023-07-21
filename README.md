@@ -1,5 +1,5 @@
 ### 🚀 Deployment
-http://16.171.0.25
+http://13.48.42.228
 
 ## Website Screenshots
 
