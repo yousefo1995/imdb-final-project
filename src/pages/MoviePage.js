@@ -169,6 +169,7 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
                 rate={data.vote_average}
                 numberOfRates={data.vote_count}
                 popularity={data.popularity}
+                movieId={movieId}
               />
             </Grid>
             <Grid item container justifyContent={{ lg: "space-between" }}>

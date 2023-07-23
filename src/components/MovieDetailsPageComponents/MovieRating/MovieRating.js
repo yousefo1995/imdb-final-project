@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Stack, Typography } from "@mui/material";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import MovingSharpIcon from "@mui/icons-material/MovingSharp";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import MovieRatingComponent from "./MovieRatingComponent";
 import { toIntegar, toKValue } from "../../../functions/numberFunctions";
+import RatingModal from "./RatingModal";
+
 const MovieRating = ({
   rate = "0.0",
   numberOfRates = "00k",
   popularity = "00",
+  movieId,
 }) => {
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
   const populartyKvalue = toKValue(popularity);
   const intRate = toIntegar(rate);
   const numberOfRatesKvalue = toKValue(numberOfRates);
@@ -41,12 +47,17 @@ const MovieRating = ({
       </MovieRatingComponent>
 
       {/* Your Rate */}
-      <MovieRatingComponent label="YOUR RATING">
+      <MovieRatingComponent label="YOUR RATING" onClick={handleOpenModal}>
         <StarBorderRoundedIcon color="info" fontSize="large" />
         <Typography color="info" fontSize="20px">
           Rate
         </Typography>
       </MovieRatingComponent>
+      <RatingModal
+        openModal={openModal}
+        handleCloseModal={handleCloseModal}
+        movieId={movieId}
+      />
 
       {/* POPULARITY */}
       <MovieRatingComponent label="POPULARITY">
