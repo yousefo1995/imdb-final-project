@@ -94,6 +94,7 @@ const RatingModal = ({
       console.log(err);
     }
     getYourRate();
+    handleCloseModal(true);
   };
   const removeRateFromFirebase = async () => {
     const ratingRef = doc(db, "Rating", currentUser.uid);
