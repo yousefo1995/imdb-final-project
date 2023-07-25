@@ -1,26 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Box, Button, Modal, Rating, Stack, Typography } from "@mui/material";
+import { Modal, Rating, Stack, Typography } from "@mui/material";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
-import ImdbButton from "../../Core/ImdbButton/ImdbButton";
 import {
-  addDoc,
   arrayRemove,
   arrayUnion,
-  collection,
   doc,
   getDoc,
-  onSnapshot,
   setDoc,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../../../Firebase";
 import { AuthContext } from "../../../AuthContext";
 import { useParams } from "react-router-dom";
-const RatingModal = ({ openModal, handleCloseModal }) => {
+import StyledCardButton from "../../MovieCard/StyledCardButton/StyledCardButton";
+
+const RatingModal = ({ openModal, handleCloseModal, updateYourRates }) => {
   const [value, setValue] = useState(0);
   const { movieId } = useParams();
-  const [yourRates, setYourRates] = useState({});
+  const [yourRates, setYourRates] = useState(null);
   const { currentUser } = useContext(AuthContext);
 
   const clickHandler = (e) => {
@@ -50,7 +48,6 @@ const RatingModal = ({ openModal, handleCloseModal }) => {
   //         console.error(error);
   //       });
   //   };
-
   const addRateToFirebase = async () => {
     try {
       const ratingRef = doc(db, "Rating", currentUser.uid);
@@ -91,13 +88,28 @@ const RatingModal = ({ openModal, handleCloseModal }) => {
     } catch (err) {
       console.log(err);
     }
+    getYourRate();
+  };
+  const removeRateFromFirebase = async () => {
+    const ratingRef = doc(db, "Rating", currentUser.uid);
+    await updateDoc(ratingRef, {
+      movies: arrayRemove(yourRates),
+    });
+    setYourRates(null);
+    updateYourRates(null);
+    setValue(0);
   };
 
   const getYourRate = async () => {
     try {
       const docRef = doc(db, "Rating", currentUser.uid);
       const docSnap = await getDoc(docRef);
-      setYourRates(docSnap.data());
+      const yourMovieRating = docSnap?.data().movies;
+      const movieRate = yourMovieRating.find(
+        (movie) => movie.movieId === movieId
+      );
+      setYourRates(movieRate);
+      updateYourRates(movieRate);
     } catch (err) {
       console.log(err);
     }
@@ -124,7 +136,7 @@ const RatingModal = ({ openModal, handleCloseModal }) => {
           bgcolor="#1F1F1F"
           width={{ xs: "100%", md: "520px" }}
           padding={4}
-          height="174px"
+          height="200px"
           borderRadius="8px"
           onClick={clickHandler}
           position="relative"
@@ -175,15 +187,28 @@ const RatingModal = ({ openModal, handleCloseModal }) => {
                 name="simple-controlled"
                 size="large"
                 max={10}
-                value={value}
+                value={yourRates ? yourRates.rateValue : value}
                 onChange={(event, newValue) => {
                   setValue(newValue);
                 }}
                 sx={{ color: "info.main" }}
               />
-              <ImdbButton width="100%" onClick={addRateToFirebase}>
-                Rate
-              </ImdbButton>
+              {!yourRates && (
+                <StyledCardButton width="100%" onClick={addRateToFirebase}>
+                  Rate
+                </StyledCardButton>
+              )}
+              {yourRates && (
+                <StyledCardButton
+                  width="100%"
+                  bg="#1F1F1F"
+                  hoverbg="#2C2C2C"
+                  color="error"
+                  onClick={removeRateFromFirebase}
+                >
+                  Remove rating
+                </StyledCardButton>
+              )}
             </Stack>
           </Stack>
         </Stack>
