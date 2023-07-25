@@ -15,9 +15,14 @@ import { AuthContext } from "../../../AuthContext";
 import { useParams } from "react-router-dom";
 import StyledCardButton from "../../MovieCard/StyledCardButton/StyledCardButton";
 
-const RatingModal = ({ openModal, handleCloseModal, updateYourRates }) => {
+const RatingModal = ({
+  openModal,
+  handleCloseModal,
+  updateYourRates,
+  movieId,
+}) => {
   const [value, setValue] = useState(0);
-  const { movieId } = useParams();
+  // const { movieId } = useParams();
   const [yourRates, setYourRates] = useState(null);
   const { currentUser } = useContext(AuthContext);
 

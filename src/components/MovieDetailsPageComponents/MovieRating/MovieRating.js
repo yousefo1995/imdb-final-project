@@ -7,24 +7,25 @@ import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import MovieRatingComponent from "./MovieRatingComponent";
 import { toIntegar, toKValue } from "../../../functions/numberFunctions";
 import RatingModal from "./RatingModal";
+import { useParams } from "react-router-dom";
 
 const MovieRating = ({
   rate = "0.0",
   numberOfRates = "00k",
   popularity = "00",
-  movieId,
 }) => {
   const [openModal, setOpenModal] = useState(false);
   const [yourRates, setYourRates] = useState(null);
+  const { movieId } = useParams();
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
   const populartyKvalue = toKValue(popularity);
   const intRate = toIntegar(rate);
   const numberOfRatesKvalue = toKValue(numberOfRates);
-
   const updateYourRates = (data) => {
     setYourRates(data);
   };
+
   return (
     <Stack flexDirection="row">
       {/* IMDB Rate */}
@@ -72,6 +73,7 @@ const MovieRating = ({
         openModal={openModal}
         handleCloseModal={handleCloseModal}
         updateYourRates={updateYourRates}
+        movieId={movieId}
       />
       {/* POPULARITY */}
       <MovieRatingComponent label="POPULARITY">
