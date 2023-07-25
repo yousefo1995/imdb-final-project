@@ -16,8 +16,10 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../Firebase";
 import { AuthContext } from "../../../AuthContext";
-const RatingModal = ({ openModal, handleCloseModal, movieId }) => {
+import { useParams } from "react-router-dom";
+const RatingModal = ({ openModal, handleCloseModal }) => {
   const [value, setValue] = useState(0);
+  const { movieId } = useParams();
   const [yourRates, setYourRates] = useState({});
   const { currentUser } = useContext(AuthContext);
 
@@ -141,7 +143,7 @@ const RatingModal = ({ openModal, handleCloseModal, movieId }) => {
                   width: "160px",
                   height: "160px",
                   color: "info.main",
-                  marginLeft: "20px",
+                  marginLeft: { xs: "-80px", md: "20px" },
                 }}
               />{" "}
               <Typography
@@ -149,7 +151,7 @@ const RatingModal = ({ openModal, handleCloseModal, movieId }) => {
                 fontWeight={500}
                 position="absolute"
                 top={68}
-                left={92}
+                left={{ xs: -8, md: 92 }}
                 color="#fff"
               >
                 8

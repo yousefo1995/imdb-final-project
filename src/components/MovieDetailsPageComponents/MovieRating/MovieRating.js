@@ -53,11 +53,7 @@ const MovieRating = ({
           Rate
         </Typography>
       </MovieRatingComponent>
-      <RatingModal
-        openModal={openModal}
-        handleCloseModal={handleCloseModal}
-        movieId={movieId}
-      />
+      <RatingModal openModal={openModal} handleCloseModal={handleCloseModal} />
 
       {/* POPULARITY */}
       <MovieRatingComponent label="POPULARITY">
