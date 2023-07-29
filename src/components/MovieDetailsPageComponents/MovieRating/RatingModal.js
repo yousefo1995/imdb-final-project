@@ -12,7 +12,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../Firebase";
 import { AuthContext } from "../../../AuthContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import StyledCardButton from "../../MovieCard/StyledCardButton/StyledCardButton";
 
 const RatingModal = ({
@@ -25,6 +25,7 @@ const RatingModal = ({
   // const { movieId } = useParams();
   const [yourRates, setYourRates] = useState(null);
   const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const clickHandler = (e) => {
     e.stopPropagation();
@@ -200,7 +201,12 @@ const RatingModal = ({
                 sx={{ color: "info.main" }}
               />
               {!yourRates && (
-                <StyledCardButton width="100%" onClick={addRateToFirebase}>
+                <StyledCardButton
+                  width="100%"
+                  onClick={
+                    currentUser ? addRateToFirebase : () => navigate("/login")
+                  }
+                >
                   Rate
                 </StyledCardButton>
               )}
