@@ -58,6 +58,8 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
   );
 
   const imageUrl = `https://image.tmdb.org/t/p/w500${data.poster_path}`;
+  const posterUrl = `https://image.tmdb.org/t/p/w500${data.backdrop_path}`;
+
   const videoKey = videoData.length !== 0 ? trailersVideoData?.key : null;
   const videoNum = videoData.length !== 0 ? videoData.results.length : null;
   const videoUrl = `https://www.youtube.com/embed/${videoKey}`;
