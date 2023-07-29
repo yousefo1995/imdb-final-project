@@ -98,7 +98,7 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
                   showWishlistBtn={false}
                   watchListHandler={watchListHandler}
                   data={data}
-                  image={imageUrl}
+                  image={posterUrl}
                   alt={data.title}
                   component="img"
                   responsiveHeight={{ md: "320px", lg: "334px", xl: "416px" }}

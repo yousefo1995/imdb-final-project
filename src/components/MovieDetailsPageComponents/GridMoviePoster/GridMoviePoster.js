@@ -21,7 +21,7 @@ const GridMoviePoster = ({
           width="100%"
           sx={{
             height: responsiveHeight,
-            objectFit: { md: "contain", lg: "cover" },
+            // objectFit: { md: "contain", lg: "cover" },
           }}
           {...res}
         />
