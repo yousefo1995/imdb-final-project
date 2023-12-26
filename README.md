@@ -1,5 +1,5 @@
 ### 🚀 Deployment
-http://13.51.194.204
+https://imdb-clone-final.netlify.app/
 
 ## Website Screenshots
 
