@@ -11,16 +11,19 @@ const GridMoviePoster = ({
   showPlayTrailerBtn = true,
   data,
   watchListHandler,
+  responsiveHeight,
+  ...res
 }) => {
-  const imageUrl = `https://image.tmdb.org/t/p/w500${imagePath}`;
   return (
     <Card sx={GridMoviePosterStyle}>
       <CardActionArea disableRipple>
         <CardMedia
-          component="img"
-          image={imageUrl}
           width="100%"
-          alt="green iguana"
+          sx={{
+            height: responsiveHeight,
+            // objectFit: { md: "contain", lg: "cover" },
+          }}
+          {...res}
         />
         {showWishlistBtn && (
           <WishBtnCards

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   CardActionArea,
   CardActions,
@@ -19,6 +19,8 @@ import { useNavigate } from "react-router";
 import { WatchListContext } from "../../../WatchListContext";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import { Stack } from "@mui/system";
+import RatingModal from "../../MovieDetailsPageComponents/MovieRating/RatingModal";
+
 const MovieCard = ({
   title = "title",
   rate = "0.0",
@@ -30,6 +32,16 @@ const MovieCard = ({
 }) => {
   const navigate = useNavigate();
   const { addToWatchList } = useContext(WatchListContext);
+  const [openModal, setOpenModal] = useState(false);
+  const [yourRates, setYourRates] = useState(null);
+  const handleOpenModal = (e) => {
+    e.stopPropagation();
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => setOpenModal(false);
+  const updateYourRates = (data) => {
+    setYourRates(data);
+  };
 
   const watchListHandler = (e) => {
     e.stopPropagation();
@@ -38,6 +50,8 @@ const MovieCard = ({
   const cardHandler = () => {
     navigate(`/movie/${movieId}`);
   };
+
+  const stringMovieId = movieId?.toString();
 
   return (
     <StyledCard showFullCard={showFullCard}>
@@ -68,9 +82,31 @@ const MovieCard = ({
                 hoverbg="#2C2C2C"
                 width="48px"
                 color="info.main"
+                onClick={handleOpenModal}
               >
-                <StarBorderRoundedIcon fontSize="small" />
+                {yourRates ? (
+                  <Typography
+                    display="flex"
+                    alignItems="center"
+                    color="info"
+                    gap={0.3}
+                  >
+                    <StarRateRoundedIcon fontSize="small" />
+                    <Typography variant="body1" color="info.main">
+                      {yourRates.rateValue}{" "}
+                    </Typography>
+                  </Typography>
+                ) : (
+                  <StarBorderRoundedIcon fontSize="small" />
+                )}
               </StyledCardButton>
+              <RatingModal
+                openModal={openModal}
+                handleCloseModal={handleCloseModal}
+                updateYourRates={updateYourRates}
+                movieId={stringMovieId}
+              />
+              {/* use context and pass the movieId */}
             </Box>
 
             <Link href="#" underline="hover" color="#fff">

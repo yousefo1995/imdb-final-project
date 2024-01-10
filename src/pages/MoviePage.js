@@ -17,32 +17,52 @@ import { WatchListContext } from "../WatchListContext";
 const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
   const { movieId } = useParams();
   const [data, setData] = useState([]);
+  const [videoData, setVideoData] = useState([]);
+  const [isplayed, setIsplayed] = useState(false);
   const { addToWatchList } = useContext(WatchListContext);
 
   const watchListHandler = (movieData) => {
     addToWatchList(movieData);
   };
-  const options = {
-    method: "GET",
-    url: `https://api.themoviedb.org/3/movie/${movieId}`,
-    params: { language: "en-US" },
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYzdiN2RmZTA2NGQ2MzZhOWRlNWIxYmUzYWVjZjc0OCIsInN1YiI6IjY0NjBiNWY4YTY3MjU0MDBlM2QxYzhkMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FEW-f0nD7r9Pt2Y0z5zNp6haKVhqashRIv0aL6aU6LM",
-    },
-  };
-  useEffect(() => {
+  const getData = (url, state) => {
+    const options = {
+      method: "GET",
+      url: url,
+      params: { language: "en-US" },
+      headers: {
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYzdiN2RmZTA2NGQ2MzZhOWRlNWIxYmUzYWVjZjc0OCIsInN1YiI6IjY0NjBiNWY4YTY3MjU0MDBlM2QxYzhkMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FEW-f0nD7r9Pt2Y0z5zNp6haKVhqashRIv0aL6aU6LM",
+      },
+    };
     axios
       .request(options)
       .then(function (response) {
-        setData(response.data);
+        state(response.data);
       })
       .catch(function (error) {
         console.error(error);
       });
+  };
+
+  const dataUrlApi = `https://api.themoviedb.org/3/movie/${movieId}`;
+  const videoUrlApi = `https://api.themoviedb.org/3/movie/${movieId}/videos`;
+
+  useEffect(() => {
+    getData(dataUrlApi, setData);
+    getData(videoUrlApi, setVideoData);
   }, []);
 
+  const trailersVideoData = videoData.results?.find(
+    (video) => video.type === "Trailer"
+  );
+
+  const imageUrl = `https://image.tmdb.org/t/p/w500${data.poster_path}`;
+  const posterUrl = `https://image.tmdb.org/t/p/w500${data.backdrop_path}`;
+
+  const videoKey = videoData.length !== 0 ? trailersVideoData?.key : null;
+  const videoNum = videoData.length !== 0 ? videoData.results.length : null;
+  const videoUrl = `https://www.youtube.com/embed/${videoKey}`;
   return (
     <Stack className="gradiant" alignItems="center">
       <Stack
@@ -65,22 +85,48 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
           <Grid item display={{ xs: "none", md: "block" }} lg={2.7} md={3.3}>
             <GridMoviePoster
               showPlayTrailerBtn={false}
-              imagePath={data.poster_path}
               watchListHandler={watchListHandler}
               data={data}
+              image={imageUrl}
+              alt={data.title}
+              component="img"
+              responsiveHeight={{ md: "320px", lg: "334px", xl: "416px" }}
             />
           </Grid>
-          <Grid item xs={12} md={8.55} lg={7}>
-            <Box>
-              <GridMoviePoster
-                imagePath={data.backdrop_path}
-                showWishlistBtn={false}
-              />
+          <Grid item height="" xs={12} md={8.55} lg={7}>
+            <Box height="inherit" bgcolor="green">
+              {!isplayed ? (
+                <GridMoviePoster
+                  showWishlistBtn={false}
+                  watchListHandler={watchListHandler}
+                  data={data}
+                  image={posterUrl}
+                  alt={data.title}
+                  component="img"
+                  responsiveHeight={{ md: "320px", lg: "334px", xl: "416px" }}
+                  onClick={() => setIsplayed(true)}
+                />
+              ) : (
+                <GridMoviePoster
+                  imagePath={data.backdrop_path}
+                  showPlayTrailerBtn={false}
+                  showWishlistBtn={false}
+                  component="iframe"
+                  src={videoUrl}
+                  // allow="autoPlay" // not working well also added ?autoplay=1 to url ******************************
+                  responsiveHeight={{
+                    xs: "320px",
+                    md: "320px",
+                    lg: "334px",
+                    xl: "416px",
+                  }}
+                />
+              )}
             </Box>
           </Grid>
           <Grid item container md={12} lg={2.25} spacing={0.5}>
             <Grid item xs={6} lg={12}>
-              <IconCard icon="videos">videos</IconCard>
+              <IconCard icon="videos">{videoNum} videos</IconCard>
             </Grid>
             <Grid item xs={6} lg={12}>
               <IconCard icon="photos">photos</IconCard>
@@ -95,8 +141,12 @@ const MoviePage = ({ creator = "creator name", stars = "stars names" }) => {
               xs={3}
             >
               <GridMoviePoster
-                imagePath={data.poster_path}
+                image={imageUrl}
+                alt={data.title}
+                component="img"
+                data={data}
                 showPlayTrailerBtn={false}
+                watchListHandler={watchListHandler}
               />
             </Grid>
             <Grid item xs={8.5} md={12} lg={8}>
